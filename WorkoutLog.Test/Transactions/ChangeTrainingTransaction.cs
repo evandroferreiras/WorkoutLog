@@ -21,13 +21,8 @@ namespace WorkoutLog.Test
 
         public void Execute()
         {
-            var workout = WorkoutDatabase.GetWorkout(workoutId);
-
-            var day = workout.Days.First(x => x.DayId.Equals(dayId));
-            var training = day.Trainings.First(x => x.TrainingId.Equals(trainingId));
-
+            var training = WorkoutDatabase.GetTraining(workoutId, dayId, trainingId);
             ExecuteChange(training);
-
         }
 
         internal abstract void ExecuteChange(ITraining training);

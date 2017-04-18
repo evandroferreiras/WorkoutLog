@@ -14,10 +14,10 @@ namespace WorkoutLog.Test
         {
             var trainings = new List<ITraining>();
             var sets = new List<Set> { new NormalSet(setId, reps, new Exercise(exerciseId, weight)) };
-            trainings.Add(new Training(trainingId, sets));
+            trainings.Add(new Training(trainingId, sets.ToArray()));
 
             var days = new List<IDay>();
-            days.Add(new Day(dayId, trainings));
+            days.Add(new Day(dayId, trainings.ToArray()));
 
             var addWorkoutTransaction = new AddWorkoutTransaction(workoutId, days.ToArray());
             addWorkoutTransaction.Execute();

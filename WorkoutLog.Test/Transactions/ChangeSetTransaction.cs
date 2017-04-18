@@ -14,8 +14,17 @@ namespace WorkoutLog.Test
 
         internal override void ExecuteChange(ITraining training)
         {
-            var set = training.GetSetById(setId);            
-            ChangeSet(set);
+            ISet set = null;
+            foreach (var item in training.Sets)
+            {
+                if (item.SetId == setId) 
+                {
+                    set = item;
+                    break;
+                }
+            }
+            if (set!= null)
+                ChangeSet(set);
         }
 
         internal abstract void ChangeSet(ISet set);

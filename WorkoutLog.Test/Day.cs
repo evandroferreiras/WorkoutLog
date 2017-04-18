@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace WorkoutLog.Test
 {
@@ -9,14 +7,14 @@ namespace WorkoutLog.Test
         private readonly int dayId;
         private ITraining[] trainings;
 
-        public Day(int dayId, IList<ITraining> trainings)
+        public Day(int dayId, ITraining[] trainings)
         {
-            this.trainings = trainings.ToArray();
+            this.trainings = trainings;
             this.dayId = dayId;
         }
 
         public int DayId => dayId;
 
-        public IList<ITraining> Trainings => trainings;
+        public ITraining[] Trainings => trainings;
     }
 }

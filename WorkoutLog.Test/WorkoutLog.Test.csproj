@@ -60,6 +60,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ITrainingDay.cs" />
+    <Compile Include="ITrainingSet.cs" />
+    <Compile Include="StartTrainingDayTransaction.cs" />
+    <Compile Include="TrainingDay.cs" />
+    <Compile Include="TrainingSet.cs" />
     <Compile Include="Transactions\AddWorkoutTransaction.cs" />
     <Compile Include="BaseTest.cs" />
     <Compile Include="Transactions\ChangeExerciseTransaction.cs" />

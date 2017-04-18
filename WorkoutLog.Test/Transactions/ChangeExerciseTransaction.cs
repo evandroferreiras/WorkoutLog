@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace WorkoutLog.Test
 {
-    //TODO: Retirar todos os LIST das classes e transformar em Array.
+
 
     internal abstract class ChangeExerciseTransaction : ChangeSetTransaction
     {
         private readonly int exerciseId;
-        private readonly IExerciseFactory exerciseFactory;
         protected ChangeExerciseTransaction(int workoutId, int dayId, int trainingId, int setId, int exerciseId) : base(workoutId, dayId, trainingId, setId)
         {
             this.exerciseId = exerciseId;
-            exerciseFactory = new ExerciseFactory();
+
         }
 
         internal override void ChangeSet(ISet set)
         {
+            var exerciseFactory = new ExerciseFactory();
             var exercise = exerciseFactory.Make(set);
             ChangeExercise(exercise);            
         }
