@@ -6,26 +6,26 @@ using System.Threading.Tasks;
 
 namespace WorkoutLog.Test
 {
-    public abstract class ChangeTrainingTransaction : ITransaction
+    public abstract class ChangeRoutineTransaction : ITransaction
     {
-        private readonly int trainingId;
+        private readonly int routineId;
         private readonly int dayId;
         private readonly int workoutId;
 
-        protected ChangeTrainingTransaction(int workoutId, int dayId, int trainingId)
+        protected ChangeRoutineTransaction(int workoutId, int dayId, int routineId)
         {
             this.workoutId = workoutId;
             this.dayId = dayId;
-            this.trainingId = trainingId;
+            this.routineId = routineId;
         }
 
         public void Execute()
         {
-            var training = WorkoutDatabase.GetTraining(workoutId, dayId, trainingId);
+            var training = WorkoutDatabase.GetRoutine(workoutId, dayId, routineId);
             ExecuteChange(training);
         }
 
-        internal abstract void ExecuteChange(ITraining training);
+        internal abstract void ExecuteChange(IRoutine training);
 
     }
 }

@@ -15,21 +15,21 @@ namespace WorkoutLog.Test
         public void ShouldBePossibleChangeTheWeight()
         {
             var workoutId = 2;
-            var trainingId = 1;
+            var routineId = 1;
             var dayId = 1;
             var setId = 100;
             var exerciseId = 10;
-            var days = CreateWorkOutAndReturnDays(workoutId, trainingId, dayId, setId, exerciseId, 10, 50);
+            var days = CreateWorkOutAndReturnDays(workoutId, routineId, dayId, setId, exerciseId, 10, 50);
 
-            var changeWeightTransaction = new ChangeWeightTransaction(workoutId, dayId, trainingId, setId, exerciseId, 60);
+            var changeWeightTransaction = new ChangeWeightTransaction(workoutId, dayId, routineId, setId, 60);
             changeWeightTransaction.Execute();
 
-            var training = ReturnFirstTraining(workoutId, trainingId, dayId);
-            var setReturned = training.Sets;
+            var training = ReturnFirstTraining(workoutId, routineId, dayId);
+            var setReturned = training.RoutineExercises;
             setReturned.Should().HaveCount(1);
-            setReturned.First().Should().BeOfType<NormalSet>();
-            var normalSet = (NormalSet)setReturned.First();
-            normalSet.Exercise.Weight.Should().Be(60);
+            setReturned.First().Should().BeOfType<NormalRoutineExercise>();
+            var normalRoutineExercise = (NormalRoutineExercise)setReturned.First();
+            normalRoutineExercise.Weight.Should().Be(60);
         }
 
         [TestMethod]
@@ -37,13 +37,13 @@ namespace WorkoutLog.Test
         public void ShouldBePossibleChangeTheWeightToNegative()
         {
             var workoutId = 2;
-            var trainingId = 1;
+            var routineId = 1;
             var dayId = 1;
             var setId = 100;
             var exerciseId = 10;
-            var days = CreateWorkOutAndReturnDays(workoutId, trainingId, dayId, setId, exerciseId, 10, 50);
+            var days = CreateWorkOutAndReturnDays(workoutId, routineId, dayId, setId, exerciseId, 10, 50);
 
-            var changeWeightTransaction = new ChangeWeightTransaction(workoutId, dayId, trainingId, setId, exerciseId, -60);
+            var changeWeightTransaction = new ChangeWeightTransaction(workoutId, dayId, routineId, setId, -60);
             changeWeightTransaction.Execute();
         }
     }

@@ -15,17 +15,17 @@ namespace WorkoutLog.Test
         public void ShouldBePossibleChangeTheNumberOfReps()
         {
             var workoutId = 2;
-            var trainingId = 1;
+            var routineId = 1;
             var dayId = 1;
             var setId = 100;
             var exerciseId = 10;
-            var days = CreateWorkOutAndReturnDays(workoutId, trainingId, dayId, setId, exerciseId, 10, 50);
+            var days = CreateWorkOutAndReturnDays(workoutId, routineId, dayId, setId, exerciseId, 10, 50);
 
-            var changeRepsTransaction = new ChangeRepsTransaction(workoutId, dayId, trainingId, 100, 20);
+            var changeRepsTransaction = new ChangeRepsTransaction(workoutId, dayId, routineId, 100, 20);
             changeRepsTransaction.Execute();
 
-            var training = ReturnFirstTraining(workoutId, trainingId, dayId);
-            var setReturned = training.Sets;
+            var training = ReturnFirstTraining(workoutId, routineId, dayId);
+            var setReturned = training.RoutineExercises;
             setReturned.Should().HaveCount(1);
             setReturned.FirstOrDefault().Reps.Should().Be(20);
         }
@@ -35,17 +35,17 @@ namespace WorkoutLog.Test
         public void ShouldntBePossibleChangeTheNumberOfRepsToNegative()
         {
             var workoutId = 2;
-            var trainingId = 1;
+            var routineId = 1;
             var dayId = 1;
             var setId = 100;
             var exerciseId = 10;
-            var days = CreateWorkOutAndReturnDays(workoutId, trainingId, dayId, setId, exerciseId, 10, 50);
+            var days = CreateWorkOutAndReturnDays(workoutId, routineId, dayId, setId, exerciseId, 10, 50);
 
-            var changeRepsTransaction = new ChangeRepsTransaction(workoutId, dayId, trainingId, 100, -20);
+            var changeRepsTransaction = new ChangeRepsTransaction(workoutId, dayId, routineId, 100, -20);
             changeRepsTransaction.Execute();
 
-            var training = ReturnFirstTraining(workoutId, trainingId, dayId);
-            var setReturned = training.Sets;
+            var training = ReturnFirstTraining(workoutId, routineId, dayId);
+            var setReturned = training.RoutineExercises;
             setReturned.Should().HaveCount(1);
             setReturned.FirstOrDefault().Reps.Should().Be(20);
         }

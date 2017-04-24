@@ -8,35 +8,45 @@ namespace WorkoutLog.Test
 {
     internal class TrainingDay : ITrainingDay
     {
-        
         private readonly DateTime beginDate;
-        private readonly ITrainingSet[] trainingSets;
-
         private readonly int dayId;
-        private readonly int trainingId;        
-        private readonly int workoutId;
+        private ITrainingRoutine[] trainingRoutines;
 
-        public TrainingDay(int workoutId, int dayId, int trainingId, DateTime dayAndHour, ISet[] sets)
+        public TrainingDay(int dayId, DateTime beginDate, IRoutine[] routines)
         {
-            this.workoutId = workoutId;
             this.dayId = dayId;
-            this.trainingId = trainingId;
-            this.beginDate = dayAndHour;            
-            this.trainingSets = new ITrainingSet[sets.Length];
+            this.beginDate = beginDate;
+
+            trainingRoutines = new ITrainingRoutine[routines.Length];
             var i = 0;
-            foreach (var set in sets)
-                trainingSets[i++] = new TrainingSet(set);
+            foreach (var item in routines)
+            {
+                trainingRoutines[i++] = new TrainingRoutine(item.RoutineId, item.RoutineExercises);
+            }
         }
 
-        public DateTime BeginDate => beginDate;
+        public DateTime BeginDate
+        {
+            get
+            {
+                return beginDate;
+            }
+        }
 
+        public int DayId
+        {
+            get
+            {
+                return dayId;
+            }
+        }
 
-        public ITrainingSet[] TrainingSets => trainingSets;
-
-        public int DayId => dayId;
-
-        public int TrainingId => trainingId;
-
-        public int WorkoutId => workoutId;
+        public ITrainingRoutine[] TrainingRoutines
+        {
+            get
+            {
+                return trainingRoutines;
+            }
+        }
     }
 }

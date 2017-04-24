@@ -5,16 +5,16 @@ namespace WorkoutLog.Test
     internal class Day : IDay
     {
         private readonly int dayId;
-        private ITraining[] trainings;
+        private IRoutine[] routines;
 
-        public Day(int dayId, ITraining[] trainings)
+        public Day(int dayId, IRoutine[] routines)
         {
-            this.trainings = trainings;
+            this.routines = routines;
             this.dayId = dayId;
         }
 
         public int DayId => dayId;
 
-        public ITraining[] Trainings => trainings;
+        public IRoutine[] Routines => routines;
     }
 }

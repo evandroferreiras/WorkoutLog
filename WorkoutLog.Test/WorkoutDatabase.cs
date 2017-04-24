@@ -8,26 +8,33 @@ namespace WorkoutLog.Test
     {
 
         static IList<Workout> workouts = new List<Workout>();
-        static IList<ITrainingDay> trainingDays = new List<ITrainingDay>();
+
         internal static void SaveWorkout(int workoutId, IDay[] days)
         {
             var workout = new Workout(workoutId, days);
             workouts.Add(workout);
         }
             
-        internal static ITraining GetTraining(int workoutId, int dayId, int trainingId)
+        internal static IRoutine GetRoutine(int workoutId, int dayId, int routineId)
         {
             var workout = GetWorkout(workoutId);
             var day = workout.Days.First(x => x.DayId == dayId);
-            var training = day.Trainings.First(x => x.TrainingId == trainingId);
+            var routine = day.Routines.First(x => x.RoutineId == routineId);
             
-            return training;
+            return routine;
         }
 
-        internal static ISet[] GetSets(int workoutId, int dayId, int trainingId)
+        internal static IRoutine[] GetRoutinesByDay(int workoutId, int dayId)
         {
-            var training = GetTraining(workoutId,dayId,trainingId);
-            return training.Sets;
+            var workout = GetWorkout(workoutId);
+            var day = workout.Days.First(x => x.DayId == dayId);
+            return day.Routines;
+        }
+
+        internal static IRoutineExercise[] GetSets(int workoutId, int dayId, int routineId)
+        {
+            var routine = GetRoutine(workoutId,dayId,routineId);
+            return routine.RoutineExercises;
         }
 
         internal static Workout GetWorkout(int workoutId)
@@ -36,18 +43,6 @@ namespace WorkoutLog.Test
             return workout;
         }
 
-        internal static void SaveTrainingDay(ITrainingDay trainingDay)
-        {
-            trainingDays.Add(trainingDay);
-        }
 
-        internal static ITrainingDay GetTrainingDay(int workoutId, int dayId, int trainingId, DateTime beginDate)
-        {
-            return trainingDays.First(x => x.WorkoutId == workoutId &&
-                                   x.DayId == dayId &&
-                                   x.TrainingId == trainingId &&
-                                   x.BeginDate == beginDate);
-
-        }
     }
 }

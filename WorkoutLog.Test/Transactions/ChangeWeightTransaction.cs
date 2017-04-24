@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace WorkoutLog.Test
 {
-    internal class ChangeWeightTransaction : ChangeExerciseTransaction
+    internal class ChangeWeightTransaction : ChangeRoutineExerciseTransaction
     {
         private readonly double weight;
 
-        public ChangeWeightTransaction(int workoutId, int dayId, int trainingId, int setId, int exerciseId, double weight) : base(workoutId, dayId, trainingId, setId, exerciseId)
+        public ChangeWeightTransaction(int workoutId, int dayId, int routineId, int setId, double weight) : base(workoutId, dayId, routineId, setId)
         {
             this.weight = weight;
         }
 
-        internal override void ChangeExercise(IExercise exercise)
+        internal override void ChangeRoutineExercise(IRoutineExercise routineExercise)
         {
-            exercise.UpdateWeight(weight);
+            routineExercise.UpdateWeight(weight);
         }
     }
 }

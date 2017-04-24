@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace WorkoutLog.Test
 {
-    internal class ChangeRepsTransaction : ChangeSetTransaction
+    internal class ChangeRepsTransaction : ChangeRoutineExerciseTransaction
     {
         private readonly int reps;
 
-        public ChangeRepsTransaction(int workoutId, int dayId, int trainingId, int setId, int reps) : base(workoutId, dayId, trainingId, setId)
+        public ChangeRepsTransaction(int workoutId, int dayId, int routineId, int setId, int reps) : base(workoutId, dayId, routineId, setId)
         {
             this.reps = reps;
         }
 
-        internal override void ChangeSet(ISet set)
+        internal override void ChangeRoutineExercise(IRoutineExercise set)
         {            
             set.UpdateReps(reps);
         }

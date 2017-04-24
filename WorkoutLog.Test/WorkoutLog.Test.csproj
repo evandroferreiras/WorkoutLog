@@ -60,33 +60,31 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DoRepetitionSetTransaction.cs" />
     <Compile Include="ITrainingDay.cs" />
-    <Compile Include="ITrainingSet.cs" />
+    <Compile Include="ITrainingRoutine.cs" />
+    <Compile Include="ITrainingRoutineExercise.cs" />
     <Compile Include="StartTrainingDayTransaction.cs" />
     <Compile Include="TrainingDay.cs" />
-    <Compile Include="TrainingSet.cs" />
+    <Compile Include="TrainingDayDatabase.cs" />
+    <Compile Include="TrainingRoutine.cs" />
+    <Compile Include="TrainingRoutineExercise.cs" />
     <Compile Include="Transactions\AddWorkoutTransaction.cs" />
     <Compile Include="BaseTest.cs" />
-    <Compile Include="Transactions\ChangeExerciseTransaction.cs" />
     <Compile Include="Transactions\ChangeRepsTransaction.cs" />
     <Compile Include="ChangeRepsTransactionTest.cs" />
-    <Compile Include="Transactions\ChangeSetTransaction.cs" />
-    <Compile Include="Transactions\ChangeTrainingTransaction.cs" />
+    <Compile Include="Transactions\ChangeRoutineExerciseTransaction.cs" />
+    <Compile Include="Transactions\ChangeRoutineTransaction.cs" />
     <Compile Include="Transactions\ChangeWeightTransaction.cs" />
     <Compile Include="ChangeWeightTransactionTest.cs" />
     <Compile Include="Day.cs" />
-    <Compile Include="Exercise.cs" />
-    <Compile Include="ExerciseFactory.cs" />
     <Compile Include="IDay.cs" />
-    <Compile Include="IExerciseFactory.cs" />
-    <Compile Include="ISet.cs" />
-    <Compile Include="NullExercise.cs" />
-    <Compile Include="Set.cs" />
-    <Compile Include="ITraining.cs" />
+    <Compile Include="IRoutineExercises.cs" />
+    <Compile Include="RoutineExercise.cs" />
+    <Compile Include="IRoutine.cs" />
     <Compile Include="ITransaction.cs" />
-    <Compile Include="NormalSet.cs" />
-    <Compile Include="IExercise.cs" />
-    <Compile Include="Training.cs" />
+    <Compile Include="NormalRoutineExercise.cs" />
+    <Compile Include="Routine.cs" />
     <Compile Include="Workout.cs" />
     <Compile Include="WorkoutDatabase.cs" />
     <Compile Include="AddWorkoutTransactionTest.cs" />

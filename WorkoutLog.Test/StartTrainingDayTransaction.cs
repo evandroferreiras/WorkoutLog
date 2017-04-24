@@ -6,22 +6,20 @@ namespace WorkoutLog.Test
     {
         private DateTime dayAndHour;
         private int dayId;
-        private int trainingId;
         private int workoutId;
 
-        public StartTrainingDayTransaction(int workoutId, int dayId, int trainingId, DateTime dayAndHour)
+        public StartTrainingDayTransaction(int workoutId, int dayId, DateTime dayAndHour)
         {
             this.workoutId = workoutId;
             this.dayId = dayId;
-            this.trainingId = trainingId;
+
             this.dayAndHour = dayAndHour;
         }
 
         public void Execute()
         {
-            var sets = WorkoutDatabase.GetSets(workoutId, dayId, trainingId);
-
-            WorkoutDatabase.SaveTrainingDay(new TrainingDay(workoutId, dayId, trainingId, dayAndHour, sets));
+            var routines = WorkoutDatabase.GetRoutinesByDay(workoutId, dayId);
+            TrainingDayDatabase.SaveTrainingDay(new TrainingDay(dayId, dayAndHour, routines));
         }
     }
 }
