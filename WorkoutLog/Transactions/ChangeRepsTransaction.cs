@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkoutLog.Workout;
 
-namespace WorkoutLog.Test
+namespace WorkoutLog.Transactions
 {
-    internal class ChangeRepsTransaction : ChangeRoutineExerciseTransaction
+    public class ChangeRepsTransaction : ChangeRoutineExerciseTransaction
     {
         private readonly int reps;
 
@@ -15,7 +16,7 @@ namespace WorkoutLog.Test
             this.reps = reps;
         }
 
-        internal override void ChangeRoutineExercise(IRoutineExercise set)
+        public override void ChangeRoutineExercise(IRoutineExercise set)
         {            
             set.UpdateReps(reps);
         }

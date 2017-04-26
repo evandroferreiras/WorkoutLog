@@ -1,8 +1,9 @@
 ﻿using System;
+using WorkoutLog.Database;
 
-namespace WorkoutLog.Test
+namespace WorkoutLog.Transactions
 {
-    internal class DoSetTransaction : ITransaction
+    public class DoSetTransaction : ITransaction
     {
         private readonly int exerciseId;
         private DateTime dayAndHour;
@@ -10,7 +11,7 @@ namespace WorkoutLog.Test
         private int routineId;
 
 
-        public DoSetTransaction( int dayId, int routineId, DateTime dayAndHour, int exerciseId)
+        public DoSetTransaction( int routineId, DateTime dayAndHour, int dayId, int exerciseId)
         {
             this.dayId = dayId;
             this.routineId = routineId;
@@ -20,10 +21,11 @@ namespace WorkoutLog.Test
 
         public void Execute()
         {
-            var tre = TrainingDayDatabase.GetTrainingRoutineExercise(dayId, routineId, dayAndHour, exerciseId);
-            if (tre != null) {
+            var tre = TrainingDayDatabase.GetTrainingRoutineExercise(routineId, dayAndHour, dayId, exerciseId);
+            if (tre != null) 
+            {
                 tre.DoRep();
-                TrainingDayDatabase.UpdateTrainingRoutine(dayId, dayAndHour, routineId, tre);
+                TrainingDayDatabase.UpdateTrainingRoutineExercise(dayId, dayAndHour, routineId, tre);
             }                                                 
         }
     }

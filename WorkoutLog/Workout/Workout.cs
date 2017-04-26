@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace WorkoutLog.Test
+namespace WorkoutLog.Workout
 {
-    internal class Workout
+    public class Workout
     {
-        private IDay[] days;
+        private IRoutine[] r;
         private int workoutId;
 
-        public Workout(int workoutId, IDay[] days)
+        public Workout(int workoutId, IRoutine[] r)
         {
             this.workoutId = workoutId;
-            this.days = days;
+            this.r = r;
         }
 
         public int WorkoutId => workoutId;
 
-        public IDay[] Days => days;
+        public IRoutine[] Routines => r;
     }
 }

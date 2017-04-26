@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkoutLog.Workout;
 
-namespace WorkoutLog.Test
+namespace WorkoutLog.Transactions
 {
-    internal class ChangeWeightTransaction : ChangeRoutineExerciseTransaction
+    public class ChangeWeightTransaction : ChangeRoutineExerciseTransaction
     {
         private readonly double weight;
 
@@ -15,7 +16,7 @@ namespace WorkoutLog.Test
             this.weight = weight;
         }
 
-        internal override void ChangeRoutineExercise(IRoutineExercise routineExercise)
+        public override void ChangeRoutineExercise(IRoutineExercise routineExercise)
         {
             routineExercise.UpdateWeight(weight);
         }

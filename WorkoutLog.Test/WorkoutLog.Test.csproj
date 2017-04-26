@@ -60,38 +60,22 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="DoRepetitionSetTransaction.cs" />
-    <Compile Include="ITrainingDay.cs" />
-    <Compile Include="ITrainingRoutine.cs" />
-    <Compile Include="ITrainingRoutineExercise.cs" />
-    <Compile Include="StartTrainingDayTransaction.cs" />
-    <Compile Include="TrainingDay.cs" />
-    <Compile Include="TrainingDayDatabase.cs" />
-    <Compile Include="TrainingRoutine.cs" />
-    <Compile Include="TrainingRoutineExercise.cs" />
-    <Compile Include="Transactions\AddWorkoutTransaction.cs" />
-    <Compile Include="BaseTest.cs" />
-    <Compile Include="Transactions\ChangeRepsTransaction.cs" />
+    <Compile Include="Base\BaseTest.cs" />
     <Compile Include="ChangeRepsTransactionTest.cs" />
-    <Compile Include="Transactions\ChangeRoutineExerciseTransaction.cs" />
-    <Compile Include="Transactions\ChangeRoutineTransaction.cs" />
-    <Compile Include="Transactions\ChangeWeightTransaction.cs" />
     <Compile Include="ChangeWeightTransactionTest.cs" />
-    <Compile Include="Day.cs" />
-    <Compile Include="IDay.cs" />
-    <Compile Include="IRoutineExercises.cs" />
-    <Compile Include="RoutineExercise.cs" />
-    <Compile Include="IRoutine.cs" />
-    <Compile Include="ITransaction.cs" />
-    <Compile Include="NormalRoutineExercise.cs" />
-    <Compile Include="Routine.cs" />
-    <Compile Include="Workout.cs" />
-    <Compile Include="WorkoutDatabase.cs" />
     <Compile Include="AddWorkoutTransactionTest.cs" />
+    <Compile Include="DoSetTransactionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StartRoutineTransactionTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WorkoutLog\WorkoutLog.csproj">
+      <Project>{1cbd8a7b-c70c-42c9-9ce1-17049f63f987}</Project>
+      <Name>WorkoutLog</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

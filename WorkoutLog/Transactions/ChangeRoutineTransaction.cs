@@ -3,29 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkoutLog.Database;
+using WorkoutLog.Workout;
 
-namespace WorkoutLog.Test
+namespace WorkoutLog.Transactions
 {
     public abstract class ChangeRoutineTransaction : ITransaction
     {
         private readonly int routineId;
-        private readonly int dayId;
         private readonly int workoutId;
 
-        protected ChangeRoutineTransaction(int workoutId, int dayId, int routineId)
+        protected ChangeRoutineTransaction(int workoutId,int routineId)
         {
             this.workoutId = workoutId;
-            this.dayId = dayId;
             this.routineId = routineId;
         }
 
         public void Execute()
         {
-            var training = WorkoutDatabase.GetRoutine(workoutId, dayId, routineId);
-            ExecuteChange(training);
+            var routine = WorkoutDatabase.GetRoutine(workoutId,routineId);
+            ExecuteChange(routine);
         }
 
-        internal abstract void ExecuteChange(IRoutine training);
+        public abstract void ExecuteChange(IRoutine routine);
 
     }
 }

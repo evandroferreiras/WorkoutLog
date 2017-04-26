@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace WorkoutLog.Test
+namespace WorkoutLog.Workout
 {
-    internal abstract class RoutineExercise : IRoutineExercise
+    public abstract class RoutineExercise : IRoutineExercise
     {
         private readonly int exerciseId;
         private readonly int routineExerciseId;

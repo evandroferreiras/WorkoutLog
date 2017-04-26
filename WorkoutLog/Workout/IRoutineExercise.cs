@@ -1,6 +1,6 @@
-﻿namespace WorkoutLog.Test
+﻿namespace WorkoutLog.Workout
 {
-    internal interface IRoutineExercise
+    public interface IRoutineExercise
     {
         int RoutineExerciseId { get; }
         int ExerciseId { get; }
