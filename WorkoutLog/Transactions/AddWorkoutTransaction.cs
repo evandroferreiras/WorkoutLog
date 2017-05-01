@@ -9,17 +9,17 @@ namespace WorkoutLog.Transactions
     public class AddWorkoutTransaction : ITransaction
     {
         private readonly IRoutine[] r;
-        private int workoutId;
+        private WorkoutIdentity wId;
 
-        public AddWorkoutTransaction(int workoutId, IRoutine[] r)
+        public AddWorkoutTransaction(WorkoutIdentity wId, IRoutine[] r)
         {
-            this.workoutId = workoutId;
+            this.wId = wId;
             this.r = r;
         }
 
         public void Execute()
         {    
-            WorkoutDatabase.SaveWorkout(workoutId, r);
+            WorkoutDatabase.SaveWorkout(wId, r);
         }
     }
 }

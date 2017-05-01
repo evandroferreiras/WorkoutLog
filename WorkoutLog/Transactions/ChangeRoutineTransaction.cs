@@ -10,18 +10,16 @@ namespace WorkoutLog.Transactions
 {
     public abstract class ChangeRoutineTransaction : ITransaction
     {
-        private readonly int routineId;
-        private readonly int workoutId;
+        private readonly WorkoutIdentity wId;
 
-        protected ChangeRoutineTransaction(int workoutId,int routineId)
+        protected ChangeRoutineTransaction(WorkoutIdentity wId)
         {
-            this.workoutId = workoutId;
-            this.routineId = routineId;
+            this.wId = wId;
         }
 
         public void Execute()
         {
-            var routine = WorkoutDatabase.GetRoutine(workoutId,routineId);
+            var routine = WorkoutDatabase.GetRoutine(wId);
             ExecuteChange(routine);
         }
 

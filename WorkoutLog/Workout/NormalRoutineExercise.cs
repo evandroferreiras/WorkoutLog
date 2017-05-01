@@ -2,10 +2,8 @@
 {
     public class NormalRoutineExercise : RoutineExercise
     {
-
-        public NormalRoutineExercise(int routineExerciseId, int exerciseId, int reps, double weight) : base(routineExerciseId, exerciseId, reps, weight)
+        public NormalRoutineExercise(WorkoutIdentity wId, int exerciseId, int reps, double weight) : base(wId, exerciseId, reps, weight)
         {
         }
-
     }
 }

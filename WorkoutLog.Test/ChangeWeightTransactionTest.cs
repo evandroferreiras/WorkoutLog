@@ -20,17 +20,18 @@ namespace WorkoutLog.Test
             var workoutId = 2;
             var routineId = 1;
             var dayId = 1;
-            var setId = 100;
+            var routineExerciseId = 100;
             var exerciseId = 10;
-            CreateWorkOutAndRoutines(workoutId, routineId, dayId, setId, exerciseId, 10, 50);
+            var id = new Workout.WorkoutIdentity(workoutId, routineId, dayId, routineExerciseId);
+            CreateWorkOutAndRoutines(id, exerciseId, 10, 50);
 
-            var changeWeightTransaction = new ChangeWeightTransaction(workoutId, dayId, routineId, setId, 60);
+            var changeWeightTransaction = new ChangeWeightTransaction(id, 60);
             changeWeightTransaction.Execute();
 
-            var routine = ReturnFirstRoutine(workoutId, routineId);
+            var routine = ReturnFirstRoutine(id);
             var days = routine.Days;
             days.Should().HaveCount(1);
-            var day = days.First(x => x.DayId == dayId);
+            var day = days.First(x => x.DayId == id.DayId);
             day.RoutineExercises.First().Should().BeOfType<NormalRoutineExercise>();
             var normalRoutineExercise = (NormalRoutineExercise)day.RoutineExercises.First(x => x.ExerciseId.Equals(exerciseId));
             normalRoutineExercise.Weight.Should().Be(60);
@@ -43,11 +44,12 @@ namespace WorkoutLog.Test
             var workoutId = 2;
             var routineId = 1;
             var dayId = 1;
-            var setId = 100;
+            var routineExerciseId = 100;
             var exerciseId = 10;
-            CreateWorkOutAndRoutines(workoutId, routineId, dayId, setId, exerciseId, 10, 50);
+            var id = new Workout.WorkoutIdentity(workoutId, routineId, dayId, routineExerciseId);
+            CreateWorkOutAndRoutines(id, exerciseId, 10, 50);
 
-            var changeWeightTransaction = new ChangeWeightTransaction(workoutId, dayId, routineId, setId, -60);
+            var changeWeightTransaction = new ChangeWeightTransaction(id, -60);
             changeWeightTransaction.Execute();
         }
     }

@@ -11,7 +11,7 @@ namespace WorkoutLog.Transactions
     {
         private readonly int reps;
 
-        public ChangeRepsTransaction(int workoutId, int dayId, int routineId, int setId, int reps) : base(workoutId, dayId, routineId, setId)
+        public ChangeRepsTransaction(WorkoutIdentity wId, int reps) : base(wId)
         {
             this.reps = reps;
         }

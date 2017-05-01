@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WorkoutLog.Workout
+namespace WorkoutLog.Training
 {
     public class TrainingDay : ITrainingDay
     {

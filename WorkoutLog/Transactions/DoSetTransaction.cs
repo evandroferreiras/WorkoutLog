@@ -1,31 +1,30 @@
 ﻿using System;
 using WorkoutLog.Database;
+using WorkoutLog.Training;
 
 namespace WorkoutLog.Transactions
 {
     public class DoSetTransaction : ITransaction
     {
+        private readonly double weight;
         private readonly int exerciseId;
-        private DateTime dayAndHour;
-        private int dayId;
-        private int routineId;
-
-
-        public DoSetTransaction( int routineId, DateTime dayAndHour, int dayId, int exerciseId)
+        private readonly TrainingIdentity tId;
+        
+        public DoSetTransaction( TrainingIdentity tId, int exerciseId, double weight )
         {
-            this.dayId = dayId;
-            this.routineId = routineId;
-            this.dayAndHour = dayAndHour;
+            
             this.exerciseId = exerciseId;
+            this.tId = tId;
+            this.weight = weight;
         }
 
         public void Execute()
         {
-            var tre = TrainingDayDatabase.GetTrainingRoutineExercise(routineId, dayAndHour, dayId, exerciseId);
+            var tre = TrainingDayDatabase.GetTrainingRoutineExercise(tId, exerciseId);
             if (tre != null) 
             {
-                tre.DoRep();
-                TrainingDayDatabase.UpdateTrainingRoutineExercise(dayId, dayAndHour, routineId, tre);
+                tre.DoRep(weight);
+                TrainingDayDatabase.UpdateTrainingRoutineExercise(tId, tre);
             }                                                 
         }
     }

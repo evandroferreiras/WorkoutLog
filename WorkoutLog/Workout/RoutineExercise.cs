@@ -5,39 +5,23 @@ namespace WorkoutLog.Workout
     public abstract class RoutineExercise : IRoutineExercise
     {
         private readonly int exerciseId;
-        private readonly int routineExerciseId;
-
+        private readonly WorkoutIdentity wId;
         private double weight;
         private int reps;
 
 
-        protected RoutineExercise(int RoutineExerciseId, int exerciseId, int reps, double weight)
+        protected RoutineExercise(WorkoutIdentity wId, int exerciseId, int reps, double weight)
         {
-            this.routineExerciseId = RoutineExerciseId;
+            this.wId = wId;
             this.exerciseId = exerciseId;
             UpdateReps(reps);
             UpdateWeight(weight);
         }
 
         public int Reps => reps;
-
-        public int RoutineExerciseId => routineExerciseId;
-
-        public double Weight
-        {
-            get
-            {
-                return weight;
-            }
-        }
-
-        public int ExerciseId
-        {
-            get
-            {
-                return exerciseId;
-            }
-        }
+        public int RoutineExerciseId => wId.RoutineExerciseId;
+        public double Weight => weight;
+        public int ExerciseId => exerciseId;        
 
         public void UpdateReps(int value) 
         {

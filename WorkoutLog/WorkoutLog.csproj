@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WorkoutLog</RootNamespace>
     <AssemblyName>WorkoutLog</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,6 +33,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,10 +50,12 @@
     <Compile Include="Extensions\RoutineExerciseExtension.cs" />
     <Compile Include="Extensions\TrainingDayExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Training\TrainingIdentity.cs" />
     <Compile Include="Transactions\AddWorkoutTransaction.cs" />
     <Compile Include="Transactions\ChangeDayTransaction.cs" />
     <Compile Include="Transactions\ChangeRepsTransaction.cs" />
     <Compile Include="Transactions\ChangeRoutineExerciseTransaction.cs" />
+    <Compile Include="Transactions\ChangeRoutineNameTransaction.cs" />
     <Compile Include="Transactions\ChangeRoutineTransaction.cs" />
     <Compile Include="Transactions\ChangeWeightTransaction.cs" />
     <Compile Include="Transactions\DoSetTransaction.cs" />
@@ -56,18 +63,23 @@
     <Compile Include="Transactions\StartRoutineTransaction.cs" />
     <Compile Include="Workout\Day.cs" />
     <Compile Include="Workout\IDay.cs" />
+    <Compile Include="Workout\WorkoutIdentity.cs" />
     <Compile Include="Workout\IRoutine.cs" />
     <Compile Include="Workout\IRoutineExercise.cs" />
-    <Compile Include="Workout\ITrainingDay.cs" />
-    <Compile Include="Workout\ITrainingRoutine.cs" />
-    <Compile Include="Workout\ITrainingRoutineExercise.cs" />
+    <Compile Include="Training\ITrainingDay.cs" />
+    <Compile Include="Training\ITrainingRoutine.cs" />
+    <Compile Include="Training\ITrainingRoutineExercise.cs" />
     <Compile Include="Workout\NormalRoutineExercise.cs" />
     <Compile Include="Workout\Routine.cs" />
     <Compile Include="Workout\RoutineExercise.cs" />
-    <Compile Include="Workout\TrainingDay.cs" />
-    <Compile Include="Workout\TrainingRoutine.cs" />
-    <Compile Include="Workout\TrainingRoutineExercise.cs" />
+    <Compile Include="Training\TrainingDay.cs" />
+    <Compile Include="Training\TrainingRoutine.cs" />
+    <Compile Include="Training\TrainingRoutineExercise.cs" />
     <Compile Include="Workout\Workout.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

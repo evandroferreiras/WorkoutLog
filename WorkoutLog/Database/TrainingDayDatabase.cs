@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkoutLog.Training;
 using WorkoutLog.Workout;
 
 namespace WorkoutLog.Database
@@ -15,25 +16,33 @@ namespace WorkoutLog.Database
             trs.Add(tr);
         }
 
-        public static ITrainingRoutine GetTrainingRoutine( int routineId, DateTime beginDate)
+        public static ITrainingRoutine GetTrainingRoutine(TrainingIdentity tId)
         {
-            return trs.First(x => x.RoutineId == routineId &&
-                                           x.BeginDate == beginDate);
+            return trs.First(x => x.RoutineId == tId.WId.RoutineId &&
+                                           x.BeginDate == tId.DayAndHour);
 
         }
 
-        public static ITrainingRoutineExercise GetTrainingRoutineExercise(int routineId, DateTime dayAndHour, int dayId, int exerciseId)
+        public static ITrainingRoutineExercise GetTrainingRoutineExercise(TrainingIdentity tId, int exerciseId)
         {
-            var tr = GetTrainingRoutine(routineId, dayAndHour);
-            var td = tr.TrainingDays.FirstOrDefault(x => x.DayId == dayId);
+            var tr = GetTrainingRoutine(tId);
+            var td = tr.TrainingDays.FirstOrDefault(x => x.DayId == tId.WId.DayId);
             return td.TrainingRoutineExercises.FirstOrDefault(x => x.ExerciseId == exerciseId);
         }
 
-        public static void UpdateTrainingRoutineExercise(int dayId, DateTime beginDate, int routineId, ITrainingRoutineExercise tre)
+        public static void UpdateTrainingRoutineExercise(TrainingIdentity tId, ITrainingRoutineExercise tre)
         {
 
 
         }
 
+        internal static (int repNbr, double weight)[] DoRep((int repNbr, double weight)[] repsDone, double weight)
+        {
+            var list = repsDone.ToList();
+            list.Add((repsDone.Count()+1, weight));
+
+            return list.ToArray();
+
+        }
     }
 }

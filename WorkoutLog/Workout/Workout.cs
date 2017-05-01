@@ -7,15 +7,16 @@ namespace WorkoutLog.Workout
     public class Workout
     {
         private IRoutine[] r;
-        private int workoutId;
+        private WorkoutIdentity wId;
 
-        public Workout(int workoutId, IRoutine[] r)
+        public Workout(WorkoutIdentity wId, IRoutine[] r)
         {
-            this.workoutId = workoutId;
+            this.wId = wId;
             this.r = r;
+            r = new IRoutine[0];
         }
 
-        public int WorkoutId => workoutId;
+        public int WorkoutId => wId.WorkoutId;
 
         public IRoutine[] Routines => r;
     }

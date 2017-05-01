@@ -22,13 +22,15 @@ namespace WorkoutLog.Test
             var dayId = 1;
             var routineExerciseId = 102;
             var exerciseId = 10;
-            CreateWorkOutAndRoutines(workoutId, routineId, dayId, routineExerciseId, exerciseId, 10, 50);
+            var id = new Workout.WorkoutIdentity(workoutId, routineId, dayId, routineExerciseId);
+            CreateWorkOutAndRoutines(id, exerciseId, 10, 50);
 
             var dayAndHour = DateTime.Now;
-            var srt = new StartRoutineTransaction(workoutId, dayId, dayAndHour);
+            var tId = new Training.TrainingIdentity(id, dayAndHour);
+            var srt = new StartRoutineTransaction(tId);
             srt.Execute();
 
-            var tr = TrainingDayDatabase.GetTrainingRoutine(routineId, dayAndHour);
+            var tr = TrainingDayDatabase.GetTrainingRoutine(tId);
 
             tr.BeginDate.Should().Be(dayAndHour);
             tr.TrainingDays.Should().HaveCount(1);

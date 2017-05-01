@@ -1,28 +1,25 @@
 ﻿using System;
 using WorkoutLog.Database;
 using WorkoutLog.Extensions;
+using WorkoutLog.Training;
 using WorkoutLog.Workout;
 
 namespace WorkoutLog.Transactions
 {
     public class StartRoutineTransaction : ITransaction
     {
-        private DateTime dayAndHour;
-        private int routineId;
-        private int workoutId;
+        private readonly TrainingIdentity tId;
 
-        public StartRoutineTransaction(int workoutId, int routineId, DateTime dayAndHour)
+        public StartRoutineTransaction(TrainingIdentity tId)
         {
-            this.workoutId = workoutId;
-            this.routineId = routineId;
-            this.dayAndHour = dayAndHour;
+            this.tId = tId;
         }
 
         public void Execute()
         {
-            var days = WorkoutDatabase.GetDaysByRotine(workoutId, routineId);
+            var days = WorkoutDatabase.GetDaysByRotine(tId.WId);
             var trainingRoutines = days.ToTrainingDay();
-            TrainingDayDatabase.SaveTrainingRoutine(new TrainingRoutine(routineId, dayAndHour, trainingRoutines));
+            TrainingDayDatabase.SaveTrainingRoutine(new TrainingRoutine(tId, trainingRoutines));
         }
 
     }

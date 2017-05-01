@@ -3,27 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkoutLog.Training;
 
-namespace WorkoutLog.Workout
+namespace WorkoutLog.Training
 {
     public class TrainingRoutine : ITrainingRoutine
     {
-        private DateTime beginDate;
-        private readonly int routineId;
+        private readonly TrainingIdentity tId;
         private ITrainingDay[] trainingDays;
 
-        public TrainingRoutine(int routineId, DateTime beginDate, ITrainingDay[] td)
+        public TrainingRoutine(TrainingIdentity tId, ITrainingDay[] td)
         {
-            this.routineId = routineId;
-            this.beginDate = beginDate;
+
             trainingDays = td;
+            this.tId = tId;
         }
 
         public DateTime BeginDate
         {
             get
             {
-                return beginDate;
+                return tId.DayAndHour;
             }
         }
 
@@ -31,7 +31,7 @@ namespace WorkoutLog.Workout
         {
             get
             {
-                return routineId;
+                return tId.WId.RoutineId;
             }
         }
 

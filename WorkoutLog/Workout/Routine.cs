@@ -8,17 +8,29 @@ namespace WorkoutLog.Workout
 {
     public class Routine : IRoutine
     {
-        private readonly int routineId;
+        private string name;
+        private readonly WorkoutIdentity wId;
         private IDay[] days;
 
-        public Routine(int routineId, IDay[] days)
+        public Routine(WorkoutIdentity wId, string name,  IDay[] days)
         {
+
             this.days = days;
-            this.routineId = routineId;
+            this.wId = wId;
+            UpdateName(name);
         }
 
-        public int RoutineId => routineId;
+        public int RoutineId => wId.RoutineId;
 
         public IDay[] Days => this.days;
+
+        public string Name => name;
+
+        public void UpdateName(string name)
+        {
+            if (String.IsNullOrWhiteSpace(name))
+                throw new ArgumentNullException("The routine name is required");
+            this.name = name;
+        }
     }
 }

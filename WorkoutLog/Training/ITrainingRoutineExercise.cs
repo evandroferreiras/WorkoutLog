@@ -1,10 +1,12 @@
-﻿namespace WorkoutLog.Workout
+﻿using System;
+
+namespace WorkoutLog.Training
 {
     public interface ITrainingRoutineExercise
     {
         int ExerciseId { get;  }
         int NumberOfPendingRepetitions { get; }
-
-        void DoRep();
+        (int repNbr, double weight)[] RepsDone { get; }
+        void DoRep(double weight);
     }
 }

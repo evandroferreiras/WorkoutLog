@@ -6,6 +6,8 @@ namespace WorkoutLog.Workout
     {
         IDay[] Days { get; }
         int RoutineId { get; }
+        string Name { get; }
 
+        void UpdateName(string name);
     }
 }

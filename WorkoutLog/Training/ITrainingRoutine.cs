@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WorkoutLog.Workout
+namespace WorkoutLog.Training
 {
     public interface ITrainingRoutine
     {
