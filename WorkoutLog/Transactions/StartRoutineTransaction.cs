@@ -17,7 +17,7 @@ namespace WorkoutLog.Transactions
 
         public void Execute()
         {
-            var days = WorkoutDatabase.GetDaysByRotine(tId.WId);
+            var days = WorkoutDatabase.GetDaysByRoutine(tId.WId);
             var trainingRoutines = days.ToTrainingDay();
             TrainingDayDatabase.SaveTrainingRoutine(new TrainingRoutine(tId, trainingRoutines));
         }

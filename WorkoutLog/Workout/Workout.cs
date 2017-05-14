@@ -4,19 +4,18 @@ using System.Linq;
 
 namespace WorkoutLog.Workout
 {
-    public class Workout
+    public class _Workout
     {
         private IRoutine[] r;
         private WorkoutIdentity wId;
 
-        public Workout(WorkoutIdentity wId, IRoutine[] r)
+        public _Workout(WorkoutIdentity wId, IRoutine[] r)
         {
             this.wId = wId;
             this.r = r;
             r = new IRoutine[0];
         }
 
-        public int WorkoutId => wId.WorkoutId;
 
         public IRoutine[] Routines => r;
     }

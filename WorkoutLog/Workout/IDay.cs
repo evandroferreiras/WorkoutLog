@@ -6,8 +6,6 @@ namespace WorkoutLog.Workout
     {
         int DayId { get; }
         IRoutineExercise[] RoutineExercises { get; set; }
-
-        void UpdateRoutineExercise(IRoutineExercise re);
-        void AddRoutineExercise(IRoutineExercise re);
+        
     }
 }

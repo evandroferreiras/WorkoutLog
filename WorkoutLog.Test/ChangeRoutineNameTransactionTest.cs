@@ -17,13 +17,13 @@ namespace WorkoutLog.Test
         public void NameShouldBeChanged()
         {
             const int exerciseId = 10;
-            var wid = new Workout.WorkoutIdentity(12, 13, 14, 1042);
-            var r = new RoutineBuilder(wid.WorkoutId, wid.RoutineId, "Default")
+            var wid = new Workout.WorkoutIdentity(13, 14, 1042);
+            var r = new RoutineBuilder(wid.RoutineId, "Default")
                           .AddNormalRoutineExercise(wid.DayId, wid.RoutineExerciseId, exerciseId, 10, 25)
                           .Build();
 
-            var awt = new AddWorkoutTransaction(wid, new[] { r });
-            awt.Execute();
+            var art = new AddRoutineTransaction(wid, r.Name, r.Days);
+            art.Execute();
 
             var crnt = new ChangeRoutineNameTransaction(wid, "Default1");
             crnt.Execute();
@@ -37,13 +37,13 @@ namespace WorkoutLog.Test
         public void NameShouldBeRequiredField()
         {
             const int exerciseId = 10;
-            var wid = new Workout.WorkoutIdentity(12, 13, 14, 1042);
-            var r = new RoutineBuilder(wid.WorkoutId, wid.RoutineId, "Default")
+            var wid = new Workout.WorkoutIdentity( 13, 14, 1042);
+            var r = new RoutineBuilder(wid.RoutineId, "Default")
                           .AddNormalRoutineExercise(wid.DayId, wid.RoutineExerciseId, exerciseId, 10, 25)
                           .Build();
 
-            var awt = new AddWorkoutTransaction(wid, new[] { r });
-            awt.Execute();
+            var art = new AddRoutineTransaction(wid, r.Name, r.Days);
+            art.Execute();
 
             var crnt = new ChangeRoutineNameTransaction(wid, "");
             crnt.Execute();
@@ -54,7 +54,7 @@ namespace WorkoutLog.Test
         [ExpectedException(typeof(Exception), "The routine doesnt exist.")]
         public void ShouldntBePossibleChangeANameForAInexistentRoutine()
         {
-            var wid = new Workout.WorkoutIdentity(1266, 1366, 1466, 10426);
+            var wid = new Workout.WorkoutIdentity(1366, 1466, 10426);
             var crnt = new ChangeRoutineNameTransaction(wid, "teste");
             crnt.Execute();
         }

@@ -10,7 +10,7 @@
   <Class Name="WorkoutLog.Database.WorkoutDatabase" Collapsed="true">
     <Position X="9.25" Y="8" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAAgAAAAAAEAAAEAAAEAACAAAIAABAgAAAAAAAAAAAA=</HashCode>
+      <HashCode>QIAgAAAAAAEABCAAAQAAAAAAAIAAAAAIAAAAAAAAAgA=</HashCode>
       <FileName>Database\WorkoutDatabase.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -52,10 +52,10 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="WorkoutLog.Transactions.AddWorkoutTransaction" Collapsed="true" BaseTypeListCollapsed="true">
+  <Class Name="WorkoutLog.Transactions.AddRoutineTransaction" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="0.5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
+      <HashCode>AAAEAAAAAAAAAAQAAAAAAAAAAAAEAAAAAAAAAEAAAAA=</HashCode>
       <FileName>Transactions\AddWorkoutTransaction.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -105,7 +105,7 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="WorkoutLog.Transactions.StartRoutineTransaction" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="0.5" Y="6.5" Width="1.5" />
+    <Position X="0.5" Y="6.75" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAIAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Transactions\StartRoutineTransaction.cs</FileName>
@@ -114,8 +114,12 @@
   </Class>
   <Class Name="WorkoutLog.Workout.Day" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="12.5" Y="2.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
     <TypeIdentifier>
-      <HashCode>UAAEAAAAAAAAAAAAAAIAAAAAAAAAAAgAAAAAAAABAAA=</HashCode>
+      <HashCode>EAAEAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
       <FileName>Workout\Day.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -127,32 +131,64 @@
       <FileName>Workout\NormalRoutineExercise.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="WorkoutLog.Workout.Routine" BaseTypeListCollapsed="true">
+  <Class Name="WorkoutLog.Workout.Routine" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="12.5" Y="1.75" Width="1.5" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAEAAABAAAAAAAAAAAAAAQAAAAEAAAAQAAAAEAAAAA=</HashCode>
+      <HashCode>AAAEAAABAAAAAAAAAAAAAAQAAAAEAAAAQAAAAEAAAAQ=</HashCode>
       <FileName>Workout\Routine.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="WorkoutLog.Workout.RoutineExercise" Collapsed="true">
-    <Position X="12.5" Y="4.25" Width="1.5" />
+    <Position X="12.5" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAABAAAAAAAAAAQEAAAEDAAAAAgAAAAAAAAABA=</HashCode>
       <FileName>Workout\RoutineExercise.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="WorkoutLog.Workout.Workout" Collapsed="true">
-    <Position X="12.5" Y="1" Width="1.5" />
+  <Class Name="WorkoutLog.Transactions.AddDayTransaction" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAIEAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAA=</HashCode>
-      <FileName>Workout\Workout.cs</FileName>
+      <HashCode>AAAEEAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Transactions\AddDayTransaction.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WorkoutLog.Transactions.AddNormalRoutineExerciseTransaction" Collapsed="true">
+    <Position X="0.5" Y="8.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAQAAAAQEAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Transactions\AddNormalRoutineExerciseTransaction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WorkoutLog.Transactions.ChangeRoutineNameTransaction" Collapsed="true">
+    <Position X="3.75" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Transactions\ChangeRoutineNameTransaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WorkoutLog.Transactions.RemoveDayTransaction" Collapsed="true">
+    <Position X="0.5" Y="9.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Transactions\RemoveDayTransaction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="WorkoutLog.Transactions.RemoveRoutineExerciseTransaction" Collapsed="true">
+    <Position X="0.5" Y="10.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Transactions\RemoveRoutineExerciseTransaction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Struct Name="WorkoutLog.Training.TrainingIdentity" Collapsed="true">
     <Position X="7" Y="4.75" Width="1.5" />
@@ -199,14 +235,14 @@
   <Interface Name="WorkoutLog.Workout.IDay" Collapsed="true">
     <Position X="7" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>UAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAABAAA=</HashCode>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
       <FileName>Workout\IDay.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="WorkoutLog.Workout.IRoutine" Collapsed="true">
     <Position X="8.75" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAABAAAAAAAAAAAAAAQAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAABAAAAAAAAAAAAAAQAAAAAAAAAQAAAAAAAAAQ=</HashCode>
       <FileName>Workout\IRoutine.cs</FileName>
     </TypeIdentifier>
   </Interface>

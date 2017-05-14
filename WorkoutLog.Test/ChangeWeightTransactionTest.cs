@@ -17,13 +17,13 @@ namespace WorkoutLog.Test
         [TestMethod]
         public void ShouldBePossibleChangeTheWeight()
         {
-            var workoutId = 2;
+
             var routineId = 1;
             var dayId = 1;
             var routineExerciseId = 100;
             var exerciseId = 10;
-            var id = new Workout.WorkoutIdentity(workoutId, routineId, dayId, routineExerciseId);
-            CreateWorkOutAndRoutines(id, exerciseId, 10, 50);
+            var id = new Workout.WorkoutIdentity(routineId, dayId, routineExerciseId);
+            CreateAndReturnRoutine(id, exerciseId, 10, 50);
 
             var changeWeightTransaction = new ChangeWeightTransaction(id, 60);
             changeWeightTransaction.Execute();
@@ -41,13 +41,12 @@ namespace WorkoutLog.Test
         [ExpectedException(typeof(ArgumentException), "The weight should'nt be negative")]
         public void ShouldBePossibleChangeTheWeightToNegative()
         {
-            var workoutId = 2;
             var routineId = 1;
             var dayId = 1;
             var routineExerciseId = 100;
             var exerciseId = 10;
-            var id = new Workout.WorkoutIdentity(workoutId, routineId, dayId, routineExerciseId);
-            CreateWorkOutAndRoutines(id, exerciseId, 10, 50);
+            var id = new Workout.WorkoutIdentity( routineId, dayId, routineExerciseId);
+            CreateAndReturnRoutine(id, exerciseId, 10, 50);
 
             var changeWeightTransaction = new ChangeWeightTransaction(id, -60);
             changeWeightTransaction.Execute();

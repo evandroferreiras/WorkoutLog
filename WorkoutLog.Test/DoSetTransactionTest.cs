@@ -19,8 +19,8 @@ namespace WorkoutLog.Test
         public void ShouldBePossibleToDoExerciseWithoutChangeWeightAndReps()
         {
             var exerciseId = 101;
-            var wId = new Workout.WorkoutIdentity(10, 12, 61, 107);
-            CreateWorkOutAndRoutines(wId, exerciseId, 10, 50);
+            var wId = new Workout.WorkoutIdentity(12, 61, 107);
+            CreateAndReturnRoutine(wId, exerciseId, 10, 50);
 
             var dayAndHour = DateTime.Now;
             var tId = new TrainingIdentity(wId, dayAndHour);
@@ -37,8 +37,8 @@ namespace WorkoutLog.Test
         public void ShouldBePossibleToDoExerciseChangingWeight()
         {
             var exerciseId = 101;
-            var wId = new Workout.WorkoutIdentity(104, 124, 614, 1074);
-            CreateWorkOutAndRoutines(wId, exerciseId, 10, 50);
+            var wId = new Workout.WorkoutIdentity(124, 614, 1074);
+            CreateAndReturnRoutine(wId, exerciseId, 10, 50);
 
             var dayAndHour = DateTime.Now;
             var tId = new TrainingIdentity(wId, dayAndHour);
@@ -55,13 +55,9 @@ namespace WorkoutLog.Test
         [ExpectedException(typeof(ArgumentException), "There is no pending exercises for this training. Go to the next.")]
         public void ShouldntBePossibleDoMoreExercisesThanAvailable()
         {
-            var workoutId = 190;
-            var routineId = 129;
-            var dayId = 619;
-            var routineExerciseId = 1097;
             var exerciseId = 1019;
-            var wId = new Workout.WorkoutIdentity(workoutId, routineId, dayId, routineExerciseId);
-            CreateWorkOutAndRoutines(wId, exerciseId, 2, 50);
+            var wId = new Workout.WorkoutIdentity(129, 619, 1097);
+            CreateAndReturnRoutine(wId, exerciseId, 2, 50);
 
             var dayAndHour = DateTime.Now;
             var tId = new TrainingIdentity(wId, dayAndHour);

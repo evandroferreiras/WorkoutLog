@@ -22,9 +22,11 @@ namespace WorkoutLog.Workout
 
         public int RoutineId => wId.RoutineId;
 
-        public IDay[] Days => this.days;
+        
 
         public string Name => name;
+
+        public IDay[] Days { get => days; set => days = value; }
 
         public void UpdateName(string name)
         {

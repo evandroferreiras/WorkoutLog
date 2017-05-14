@@ -12,17 +12,17 @@ namespace WorkoutLog.Test.Base
 {
     public class RoutineBuilder 
     {
-        private readonly int workoutId;
+
         private readonly int routineId;
         private string name;
 
         private IList<IDay> days { get; set; }
         
-        public RoutineBuilder(int workoutId, int routineId, string name)
+        public RoutineBuilder(int routineId, string name)
         {
 
             days = new List<IDay>();
-            this.workoutId = workoutId;
+
             this.routineId = routineId;
             this.name = name;
             
@@ -30,7 +30,7 @@ namespace WorkoutLog.Test.Base
 
         public RoutineBuilder AddNormalRoutineExercise(int dayId, int routineExerciseId, int exerciseId, int reps, double weight ) {
                                
-            var id = new WorkoutIdentity(workoutId, routineId, dayId, routineExerciseId);
+            var id = new WorkoutIdentity( routineId, dayId, routineExerciseId);
 
             var nre = new NormalRoutineExercise(id, exerciseId, reps, weight);
             
@@ -38,7 +38,9 @@ namespace WorkoutLog.Test.Base
             if (day == null)
                 day = new Day(id, new List<NormalRoutineExercise>().ToArray());
 
-            day.AddRoutineExercise(nre);
+            var reList = day.RoutineExercises.ToList();
+            reList.Add(nre);
+            day.RoutineExercises = reList.ToArray();
             days.Add(day);
             return this;
         }
@@ -46,32 +48,31 @@ namespace WorkoutLog.Test.Base
         public IRoutine Build() {
             if (days == null)
                 throw new ArgumentNullException("It's necessary define the days");
-            return new Routine(new WorkoutIdentity(workoutId,routineId), name, days.ToArray());
+            return new Routine(new WorkoutIdentity(routineId), name, days.ToArray());
         }
     }
 
     public class BaseTest
     {
-        internal static IEnumerable<IRoutine> CreateWorkOutAndRoutines(WorkoutIdentity id, int exerciseId, int reps, double weight)
+        internal static IRoutine CreateAndReturnRoutine(WorkoutIdentity id, int exerciseId, int reps, double weight)
         {
-            var routine = new RoutineBuilder(id.WorkoutId, id.RoutineId, "Default")
+            var routine = new RoutineBuilder( id.RoutineId, "Default")
               .AddNormalRoutineExercise(id.DayId, id.RoutineExerciseId, exerciseId, reps, weight)
               .Build();
 
-            var addWorkoutTransaction = new AddWorkoutTransaction(id, new[] { routine });
-            addWorkoutTransaction.Execute();
+            var addRoutineTransaction = new AddRoutineTransaction(id, routine.Name,routine.Days);
+            addRoutineTransaction.Execute();
 
-            return new[] { routine };
+            return routine;
         }
 
-        internal static IRoutine ReturnFirstRoutine(WorkoutIdentity id)
+        internal static IRoutine ReturnFirstRoutine(WorkoutIdentity wId)
         {
-            var workoutUpdated = WorkoutDatabase.GetWorkout(id);
+            var routineUpdated = WorkoutDatabase.GetRoutine(wId);
 
-            var r = workoutUpdated.Routines.First(x => x.RoutineId == id.RoutineId);
-            r.Should().NotBeNull();
+            routineUpdated.Should().NotBeNull();
 
-            return r;
+            return routineUpdated;
         }
 
     }

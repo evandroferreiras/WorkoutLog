@@ -17,8 +17,8 @@ namespace WorkoutLog.Test
         public void ShouldBePossibleChangeTheNumberOfReps()
         {
             var exerciseId = 10;
-            var id = new Workout.WorkoutIdentity(2, 1, 1, 100);
-            CreateWorkOutAndRoutines(id, exerciseId, 10, 50);
+            var id = new Workout.WorkoutIdentity( 1, 1, 100);
+            CreateAndReturnRoutine(id, exerciseId, 10, 50);
 
             var changeRepsTransaction = new ChangeRepsTransaction(id, 20);
             changeRepsTransaction.Execute();
@@ -38,8 +38,8 @@ namespace WorkoutLog.Test
         {
 
             var exerciseId = 10;
-            var wid = new Workout.WorkoutIdentity(2, 1, 1, 100);
-            CreateWorkOutAndRoutines(wid, exerciseId, 10, 50);
+            var wid = new Workout.WorkoutIdentity( 1, 1, 100);
+            CreateAndReturnRoutine(wid, exerciseId, 10, 50);
 
             var changeRepsTransaction = new ChangeRepsTransaction(wid, -20);
             changeRepsTransaction.Execute();
@@ -57,7 +57,7 @@ namespace WorkoutLog.Test
         [ExpectedException(typeof(Exception),"The routine doesnt exist")]
         public void ShouldntBePossibleChangeTheRepsOfAnInexistentWorkout()
         {
-            var wid = new Workout.WorkoutIdentity(2, 91, 91, 100);
+            var wid = new Workout.WorkoutIdentity(91, 91, 100);
             var changeRepsTransaction = new ChangeRepsTransaction(wid, -10);
             changeRepsTransaction.Execute();
         }

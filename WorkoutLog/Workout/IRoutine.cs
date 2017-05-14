@@ -4,7 +4,7 @@ namespace WorkoutLog.Workout
 {
     public interface IRoutine
     {
-        IDay[] Days { get; }
+        IDay[] Days { get; set; }
         int RoutineId { get; }
         string Name { get; }
 

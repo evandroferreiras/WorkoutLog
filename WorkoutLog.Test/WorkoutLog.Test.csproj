@@ -64,6 +64,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AddDayTransactionTest.cs" />
+    <Compile Include="AddNormalRoutineExerciseTransactionTest.cs" />
     <Compile Include="Base\BaseTest.cs" />
     <Compile Include="ChangeRepsTransactionTest.cs" />
     <Compile Include="ChangeRoutineNameTransactionTest.cs" />
@@ -71,6 +73,8 @@
     <Compile Include="AddWorkoutTransactionTest.cs" />
     <Compile Include="DoSetTransactionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RemoveDayTransactionTest.cs" />
+    <Compile Include="RemoveRoutineExerciseTransactionTest.cs" />
     <Compile Include="StartRoutineTransactionTest.cs" />
   </ItemGroup>
   <ItemGroup>

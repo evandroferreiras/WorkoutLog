@@ -11,22 +11,21 @@ using WorkoutLog.Transactions;
 
 namespace WorkoutLog.Test
 {
+    //TODO: Modify to StartTrainingDayTransaction
+    //TODO: Create a GetNextExerciseTransaction
+    //TODO: Create a FinishTrainingDayTransaction
     [TestClass]
     public class StartRoutineTransactionTest : BaseTest
     {
         [TestMethod]
         public void ShouldBePossibleToStartATrainingRoutine()
         {
-            var workoutId = 1;
-            var routineId = 1;
-            var dayId = 1;
-            var routineExerciseId = 102;
             var exerciseId = 10;
-            var id = new Workout.WorkoutIdentity(workoutId, routineId, dayId, routineExerciseId);
-            CreateWorkOutAndRoutines(id, exerciseId, 10, 50);
+            var wId = new Workout.WorkoutIdentity( 1, 1, 102);
+            CreateAndReturnRoutine(wId, exerciseId, 10, 50);
 
             var dayAndHour = DateTime.Now;
-            var tId = new Training.TrainingIdentity(id, dayAndHour);
+            var tId = new Training.TrainingIdentity(wId, dayAndHour);
             var srt = new StartRoutineTransaction(tId);
             srt.Execute();
 
@@ -34,7 +33,7 @@ namespace WorkoutLog.Test
 
             tr.BeginDate.Should().Be(dayAndHour);
             tr.TrainingDays.Should().HaveCount(1);
-            var td = tr.TrainingDays.First(x => x.DayId.Equals(dayId));
+            var td = tr.TrainingDays.First(x => x.DayId.Equals(wId.DayId));
             td.Should().NotBeNull();
         }
     }

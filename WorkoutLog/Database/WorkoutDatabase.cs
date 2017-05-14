@@ -5,24 +5,41 @@ using WorkoutLog.Workout;
 
 namespace WorkoutLog.Database
 {
+
+    public static class DayExtensions
+    {
+        public static IDay FirstOrThrow(this IEnumerable<IDay> days, Func<IDay,bool> predicate)
+        {
+            var day = days.FirstOrDefault(predicate);
+            if (day == null)
+                throw new Exception("The day doesnt exist.");
+
+            return day;
+        }
+    }
+
+    public static class RoutineExercisesExtensions
+    {
+        public static IRoutineExercise FirstOrThrow(this IEnumerable<IRoutineExercise> res, Func<IRoutineExercise,bool> predicate)
+        {
+            var re = res.FirstOrDefault(predicate);
+            if (re == null)
+                throw new Exception("The routine exercise doesnt exist.");
+
+            return re;
+        }
+    }
+
     public class WorkoutDatabase
     {
 
-        static IList<Workout.Workout> workouts = new List<Workout.Workout>();
-
-        public static void SaveWorkout(WorkoutIdentity workoutId, IRoutine[] days)
-        {
-            var workout = new Workout.Workout(workoutId, days);
-            workouts.Add(workout);
-        }
+        static IList<Workout.Routine> routines = new List<Workout.Routine>();
                       
         public static IRoutine GetRoutine(WorkoutIdentity wid)
         {
 
-            var routine = (from w in workouts
-                          from r in w.Routines
-                          where w.WorkoutId == wid.WorkoutId
-                          && r.RoutineId == wid.RoutineId
+            var routine = (from r in routines
+                          where r.RoutineId == wid.RoutineId
                           select (r ?? null )).FirstOrDefault();
             if (routine == null)
             {
@@ -32,57 +49,66 @@ namespace WorkoutLog.Database
         }
 
 
-        internal static IRoutineExercise[] UpdateRoutineExercise(IRoutineExercise[] routineExercises, IRoutineExercise re)
-        {
-            var res = routineExercises.ToList();
-
-            var reu = res.FirstOrDefault(x => x.RoutineExerciseId == re.RoutineExerciseId);
-            if (reu != null) 
-                res.Remove(reu);
-            
-            res.Add(re);
-
-            return res.ToArray();
-
-        }
-
-        internal static IRoutineExercise[] AddRoutineExercise(IRoutineExercise[] routineExercises, IRoutineExercise re)
-        {
-            var res = routineExercises.ToList();
-            res.Add(re);
-
-            return res.ToArray();
-        }
 
         internal static IDay GetDay(WorkoutIdentity id)
         {
             var routine = GetRoutine(id);
-            return routine.Days.FirstOrDefault(x => x.DayId == id.DayId);
+            return routine.Days.FirstOrThrow(x => x.DayId == id.DayId);
         }
 
-        public static IDay[] GetDaysByRotine(WorkoutIdentity id)
+        public static IDay[] GetDaysByRoutine(WorkoutIdentity id)
         {
             var routine = GetRoutine(id);
             return routine.Days;
         }
 
         public static IRoutineExercise[] GetRoutineExercises(WorkoutIdentity id) {
-            return GetRoutineExercises(id.WorkoutId, id.RoutineId, id.DayId);
-        }
-
-        public static IRoutineExercise[] GetRoutineExercises(int workoutId, int routineId, int dayId)
-        {
-            var routine = GetRoutine(new WorkoutIdentity(workoutId,routineId));
-            var day = routine.Days.FirstOrDefault(x => x.DayId == dayId);
+            var routine = GetRoutine(new WorkoutIdentity(id.RoutineId));
+            var day = routine.Days.FirstOrDefault(x => x.DayId == id.DayId);
             return day.RoutineExercises;
+            
         }
 
-        public static Workout.Workout GetWorkout(WorkoutIdentity id)
+        internal static void AddDay(WorkoutIdentity wId, Day day)
         {
-            var workout = workouts.First(x => x.WorkoutId == id.WorkoutId);
-            return workout;
+            var routine = GetRoutine(wId);
+            var daysList = routine.Days.ToList();
+            daysList.Add(day);
+            routine.Days = daysList.ToArray();
         }
 
+        internal static void RemoveDay(WorkoutIdentity wId)
+        {
+            var routine = GetRoutine(wId);
+            var dayList = routine.Days.ToList();
 
+            var dayToRemove = dayList.FirstOrThrow(x => x.DayId == wId.DayId);
+            
+            dayList.Remove(dayToRemove);
+            routine.Days = dayList.ToArray();
+        }
+
+        internal static void AddRoutineExercise(WorkoutIdentity wId, IRoutineExercise re)
+        {
+            var day = GetDay(wId);
+            var reList = day.RoutineExercises.ToList();
+            reList.Add(re);
+            day.RoutineExercises = reList.ToArray();            
+        }
+
+        internal static void RemoveRoutineExercise(WorkoutIdentity wId)
+        {
+            var day = GetDay(wId);
+            var reList = day.RoutineExercises.ToList();
+            var reToRemove = reList.FirstOrThrow(x => x.RoutineExerciseId == wId.RoutineExerciseId);
+            reList.Remove(reToRemove);
+            day.RoutineExercises = reList.ToArray();
+        }
+
+        public static void SaveRoutine(WorkoutIdentity wId, string name, IDay[] days)
+        {
+            var workout = new Routine(wId, name, days);
+            routines.Add(workout);
+        }
     }
 }

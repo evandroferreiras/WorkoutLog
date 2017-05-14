@@ -30,14 +30,5 @@ namespace WorkoutLog.Workout
             }
         }
 
-        public void AddRoutineExercise(IRoutineExercise re)
-        {
-            res = WorkoutDatabase.AddRoutineExercise(res, re);
-        }
-
-        public void UpdateRoutineExercise(IRoutineExercise re)
-        {
-            res = WorkoutDatabase.UpdateRoutineExercise(res, re);
-        }
     }
 }
