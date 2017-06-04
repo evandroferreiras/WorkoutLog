@@ -6,7 +6,9 @@ namespace WorkoutLog.Training
     {
         int ExerciseId { get;  }
         int NumberOfPendingRepetitions { get; }
+        bool ExerciseFinished { get; }
         (int repNbr, double weight)[] RepsDone { get; }
         void DoRep(double weight);
+        
     }
 }

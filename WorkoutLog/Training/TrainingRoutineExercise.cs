@@ -31,6 +31,8 @@ namespace WorkoutLog.Training
             }
         }
 
+        public bool ExerciseFinished => (numberOfPendingRepetitions == 0);
+
         public int NumberOfPendingRepetitions
         {
             get
@@ -49,13 +51,12 @@ namespace WorkoutLog.Training
 
         public void DoRep(double weight)
         {
-            if (numberOfPendingRepetitions == 0)
+            if (ExerciseFinished)
             {
                 throw new ArgumentException("There is no pending exercises for this training. Go to the next.");
             }
 
             repsDone = TrainingDayDatabase.DoRep(repsDone, weight);
-
             numberOfPendingRepetitions--;
         }
     }

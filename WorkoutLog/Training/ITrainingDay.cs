@@ -8,5 +8,8 @@ namespace WorkoutLog.Training
         int DayId { get;  }
 
         ITrainingRoutineExercise[] TrainingRoutineExercises { get; }
+        DateTime BeginDate { get; }
+
+        ITrainingRoutineExercise GetNextExercise();
     }
 }

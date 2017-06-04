@@ -24,7 +24,7 @@ namespace WorkoutLog.Test
 
             var dayAndHour = DateTime.Now;
             var tId = new TrainingIdentity(wId, dayAndHour);
-            var srt = new StartRoutineTransaction(tId);
+            var srt = new StartTrainingDayTransaction(tId);
             srt.Execute();
 
             var doSetTransaction = new DoSetTransaction(tId, exerciseId,50);
@@ -42,7 +42,7 @@ namespace WorkoutLog.Test
 
             var dayAndHour = DateTime.Now;
             var tId = new TrainingIdentity(wId, dayAndHour);
-            var srt = new StartRoutineTransaction(tId);
+            var srt = new StartTrainingDayTransaction(tId);
             srt.Execute();
 
             var doSetTransaction = new DoSetTransaction(tId, exerciseId, 55);
@@ -61,7 +61,7 @@ namespace WorkoutLog.Test
 
             var dayAndHour = DateTime.Now;
             var tId = new TrainingIdentity(wId, dayAndHour);
-            var startTrainingDayTransaction = new StartRoutineTransaction(tId);
+            var startTrainingDayTransaction = new StartTrainingDayTransaction(tId);
             startTrainingDayTransaction.Execute();
 
             var doSetTransaction = new DoSetTransaction(tId, exerciseId, 50);
@@ -74,12 +74,33 @@ namespace WorkoutLog.Test
             doSetTransaction3.Execute();
         }
 
+        [TestMethod]
+        public void ExerciseShouldBeFinishedAfterAllSets()
+        {
+            var exerciseId = 2019;
+            var wId = new Workout.WorkoutIdentity(229, 219, 2097);
+            CreateAndReturnRoutine(wId, exerciseId, 2, 50);
+
+            var dayAndHour = DateTime.Now;
+            var tId = new TrainingIdentity(wId, dayAndHour);
+            var startTrainingDayTransaction = new StartTrainingDayTransaction(tId);
+            startTrainingDayTransaction.Execute();
+
+            var doSetTransaction = new DoSetTransaction(tId, exerciseId, 50);
+            doSetTransaction.Execute();
+
+            var doSetTransaction2 = new DoSetTransaction(tId, exerciseId, 50);
+            doSetTransaction2.Execute();
+
+            var td = TrainingDayDatabase.GetTrainingDay(tId);
+            var tre = td.TrainingRoutineExercises.First(x => x.ExerciseId == exerciseId);
+            tre.ExerciseFinished.Should().BeTrue();
+        }
+
         private static void VerifyPendingReps(TrainingIdentity tId, int exerciseId, int expectedReps, double lastWeight)
         {
-            var tr = TrainingDayDatabase.GetTrainingRoutine(tId);
-            tr.BeginDate.Should().Be(tId.DayAndHour);
-            tr.TrainingDays.Should().HaveCount(1);
-            var td = tr.TrainingDays.First(x => x.DayId.Equals(tId.WId.DayId));
+            var td = TrainingDayDatabase.GetTrainingDay(tId);
+            td.BeginDate.Should().Be(tId.DayAndHour);            
             var tre = td.TrainingRoutineExercises.First(x => x.ExerciseId == exerciseId);
             tre.NumberOfPendingRepetitions.Should().Be(expectedReps);
 

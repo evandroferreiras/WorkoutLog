@@ -64,20 +64,18 @@
     <Compile Include="Transactions\ITransaction.cs" />
     <Compile Include="Transactions\RemoveDayTransaction.cs" />
     <Compile Include="Transactions\RemoveRoutineExerciseTransaction.cs" />
-    <Compile Include="Transactions\StartRoutineTransaction.cs" />
+    <Compile Include="Transactions\StartTrainingDayTransaction.cs" />
     <Compile Include="Workout\Day.cs" />
     <Compile Include="Workout\IDay.cs" />
     <Compile Include="Workout\WorkoutIdentity.cs" />
     <Compile Include="Workout\IRoutine.cs" />
     <Compile Include="Workout\IRoutineExercise.cs" />
     <Compile Include="Training\ITrainingDay.cs" />
-    <Compile Include="Training\ITrainingRoutine.cs" />
     <Compile Include="Training\ITrainingRoutineExercise.cs" />
     <Compile Include="Workout\NormalRoutineExercise.cs" />
     <Compile Include="Workout\Routine.cs" />
     <Compile Include="Workout\RoutineExercise.cs" />
     <Compile Include="Training\TrainingDay.cs" />
-    <Compile Include="Training\TrainingRoutine.cs" />
     <Compile Include="Training\TrainingRoutineExercise.cs" />
     <Compile Include="Workout\Workout.cs" />
   </ItemGroup>

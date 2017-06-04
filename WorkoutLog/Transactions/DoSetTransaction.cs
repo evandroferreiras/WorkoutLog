@@ -11,8 +11,7 @@ namespace WorkoutLog.Transactions
         private readonly TrainingIdentity tId;
         
         public DoSetTransaction( TrainingIdentity tId, int exerciseId, double weight )
-        {
-            
+        {            
             this.exerciseId = exerciseId;
             this.tId = tId;
             this.weight = weight;
@@ -22,10 +21,7 @@ namespace WorkoutLog.Transactions
         {
             var tre = TrainingDayDatabase.GetTrainingRoutineExercise(tId, exerciseId);
             if (tre != null) 
-            {
-                tre.DoRep(weight);
-                TrainingDayDatabase.UpdateTrainingRoutineExercise(tId, tre);
-            }                                                 
+                tre.DoRep(weight);        
         }
     }
 }

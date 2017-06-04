@@ -10,24 +10,26 @@ namespace WorkoutLog.Database
 {
     public class TrainingDayDatabase
     {
-        static IList<ITrainingRoutine> trs = new List<ITrainingRoutine>();
-        public static void SaveTrainingRoutine(ITrainingRoutine tr)
+        public static void Clear()
         {
-            trs.Add(tr);
+            tds.Clear();
         }
 
-        public static ITrainingRoutine GetTrainingRoutine(TrainingIdentity tId)
+        static IList<ITrainingDay> tds = new List<ITrainingDay>();
+        public static void SaveTrainingDay(ITrainingDay td)
         {
-            return trs.First(x => x.RoutineId == tId.WId.RoutineId &&
-                                           x.BeginDate == tId.DayAndHour);
-
+            tds.Add(td);
         }
 
         public static ITrainingRoutineExercise GetTrainingRoutineExercise(TrainingIdentity tId, int exerciseId)
         {
-            var tr = GetTrainingRoutine(tId);
-            var td = tr.TrainingDays.FirstOrDefault(x => x.DayId == tId.WId.DayId);
+            var td = GetTrainingDay(tId);
             return td.TrainingRoutineExercises.FirstOrDefault(x => x.ExerciseId == exerciseId);
+        }
+
+        public static ITrainingDay GetTrainingDay(TrainingIdentity tId)
+        {
+            return tds.FirstOrDefault(x => x.DayId == tId.WId.DayId);
         }
 
         public static void UpdateTrainingRoutineExercise(TrainingIdentity tId, ITrainingRoutineExercise tre)
@@ -40,9 +42,14 @@ namespace WorkoutLog.Database
         {
             var list = repsDone.ToList();
             list.Add((repsDone.Count()+1, weight));
-
             return list.ToArray();
 
+        }
+
+        internal static ITrainingRoutineExercise GetNextExercise(ITrainingRoutineExercise[] tre)
+        {
+            var list = tre.ToList();
+            return list.FirstOrDefault(x => !x.ExerciseFinished);
         }
     }
 }

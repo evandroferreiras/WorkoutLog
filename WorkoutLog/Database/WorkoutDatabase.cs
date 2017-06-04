@@ -34,7 +34,12 @@ namespace WorkoutLog.Database
     {
 
         static IList<Workout.Routine> routines = new List<Workout.Routine>();
-                      
+               
+        public static void Clear()
+        {
+            routines.Clear();
+        }
+
         public static IRoutine GetRoutine(WorkoutIdentity wid)
         {
 
