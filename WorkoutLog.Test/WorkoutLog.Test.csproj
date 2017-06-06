@@ -70,8 +70,9 @@
     <Compile Include="ChangeRepsTransactionTest.cs" />
     <Compile Include="ChangeRoutineNameTransactionTest.cs" />
     <Compile Include="ChangeWeightTransactionTest.cs" />
-    <Compile Include="AddWorkoutTransactionTest.cs" />
+    <Compile Include="AddRoutineTransactionTest.cs" />
     <Compile Include="DoSetTransactionTest.cs" />
+    <Compile Include="FinishTraininingDayTransactionTest.cs" />
     <Compile Include="GetNextExerciseTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoveDayTransactionTest.cs" />

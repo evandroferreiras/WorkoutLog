@@ -9,6 +9,7 @@ namespace WorkoutLog.Training
 
         ITrainingRoutineExercise[] TrainingRoutineExercises { get; }
         DateTime BeginDate { get; }
+        DateTime EndDate { get; set; }
 
         ITrainingRoutineExercise GetNextExercise();
     }

@@ -12,6 +12,7 @@ namespace WorkoutLog.Training
         private readonly TrainingIdentity _tId;
         private readonly int dayId;
         private ITrainingRoutineExercise[] tre;
+        private DateTime _endDate;
 
         public TrainingDay(TrainingIdentity tId, int dayId, ITrainingRoutineExercise[] tre)
         {
@@ -42,6 +43,11 @@ namespace WorkoutLog.Training
             {
                 return tre;
             }
+        }
+
+        public DateTime EndDate {
+            get => _endDate;
+            set => _endDate = value;
         }
 
         public ITrainingRoutineExercise GetNextExercise()

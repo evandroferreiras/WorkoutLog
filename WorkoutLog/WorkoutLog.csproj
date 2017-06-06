@@ -53,7 +53,7 @@
     <Compile Include="Training\TrainingIdentity.cs" />
     <Compile Include="Transactions\AddDayTransaction.cs" />
     <Compile Include="Transactions\AddNormalRoutineExerciseTransaction.cs" />
-    <Compile Include="Transactions\AddWorkoutTransaction.cs" />
+    <Compile Include="Transactions\AddRoutineTransaction.cs" />
     <Compile Include="Transactions\ChangeDayTransaction.cs" />
     <Compile Include="Transactions\ChangeRepsTransaction.cs" />
     <Compile Include="Transactions\ChangeRoutineExerciseTransaction.cs" />
@@ -61,6 +61,7 @@
     <Compile Include="Transactions\ChangeRoutineTransaction.cs" />
     <Compile Include="Transactions\ChangeWeightTransaction.cs" />
     <Compile Include="Transactions\DoSetTransaction.cs" />
+    <Compile Include="Transactions\FinishTraininingDayTransaction.cs" />
     <Compile Include="Transactions\ITransaction.cs" />
     <Compile Include="Transactions\RemoveDayTransaction.cs" />
     <Compile Include="Transactions\RemoveRoutineExerciseTransaction.cs" />

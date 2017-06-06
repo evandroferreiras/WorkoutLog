@@ -18,7 +18,16 @@ namespace WorkoutLog.Database
         static IList<ITrainingDay> tds = new List<ITrainingDay>();
         public static void SaveTrainingDay(ITrainingDay td)
         {
-            tds.Add(td);
+            var trainingDay = tds.FirstOrDefault(x => (x.DayId == td.DayId && x.BeginDate.Equals(td.BeginDate)));
+            if (trainingDay == null)
+            {
+                tds.Add(td);
+            }
+            else
+            {
+                tds.Remove(trainingDay);
+                tds.Add(td);
+            }            
         }
 
         public static ITrainingRoutineExercise GetTrainingRoutineExercise(TrainingIdentity tId, int exerciseId)
