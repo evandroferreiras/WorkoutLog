@@ -15,20 +15,20 @@ namespace WorkoutLog.Test
         [TestMethod]
         public void ShouldBePossibleToRemoveARoutineExercise()
         {
-            var wId = new WorkoutIdentity(12992, 123398, 3228);
+            var wId = new WorkoutIdentity(12992, DayOfWeek.Monday, 3228);
 
             var routine = new RoutineBuilder(wId.RoutineId, "Default")
-                              .AddNormalRoutineExercise(wId.DayId, wId.RoutineExerciseId, 10, 10, 70)
+                              .AddDayAndNormalRoutineExercise(wId.DayOfWeek, wId.RoutineExerciseId, 10, 10, 70)
                               .Build();
 
-            var art = new AddRoutineTransaction(wId, routine.Name, routine.Days);
-            art.Execute();
+            
+            
 
-            var rret = new RemoveRoutineExerciseTransaction(wId);
+            var rret = new RemoveRoutineExerciseTransaction(wId,0);
             rret.Execute();
 
             var returned = ReturnFirstRoutine(wId);
-            var day = returned.Days.First(x => x.DayId == wId.DayId);
+            var day = returned.Days.First(x => x.DayOfWeek == wId.DayOfWeek);
             day.RoutineExercises.Should().HaveCount(0);
 
 
@@ -38,17 +38,17 @@ namespace WorkoutLog.Test
         [ExpectedException(typeof(Exception), "The routine exercise doesnt exist.")]
         public void ShouldntBePossibleToRemoveAnInexistentRoutineExercise()
         {
-            var wId = new WorkoutIdentity(12992, 123398, 3228);
+            var wId = new WorkoutIdentity(12992, DayOfWeek.Monday, 3228);
 
             var routine = new RoutineBuilder( wId.RoutineId, "Default")
-                              .AddNormalRoutineExercise(wId.DayId, wId.RoutineExerciseId, 10, 10, 70)
+                              .AddDayAndNormalRoutineExercise(wId.DayOfWeek, wId.RoutineExerciseId, 10, 10, 70)
                               .Build();
 
-            var art = new AddRoutineTransaction(wId, routine.Name, routine.Days);
-            art.Execute();
+            
+            
 
-            var newWId = new WorkoutIdentity(12992, 123398, 9000);
-            var rret = new RemoveRoutineExerciseTransaction(newWId);
+            var newWId = new WorkoutIdentity(12992, DayOfWeek.Monday, 9000);
+            var rret = new RemoveRoutineExerciseTransaction(newWId,1);
             rret.Execute();
         }
 
@@ -56,17 +56,17 @@ namespace WorkoutLog.Test
         [ExpectedException(typeof(Exception), "The day doesnt exist.")]
         public void ShouldntBePossibleToRemoveFromAnInexistentDay()
         {
-            var wId = new WorkoutIdentity(12992, 123398, 3228);
+            var wId = new WorkoutIdentity(12992, DayOfWeek.Monday, 3228);
 
             var routine = new RoutineBuilder(wId.RoutineId, "Default")
-                              .AddNormalRoutineExercise(wId.DayId, wId.RoutineExerciseId, 10, 10, 70)
+                              .AddDayAndNormalRoutineExercise(wId.DayOfWeek, wId.RoutineExerciseId, 10, 10, 70)
                               .Build();
 
-            var art = new AddRoutineTransaction(wId, routine.Name, routine.Days);
-            art.Execute();
+            
+            
 
-            var newWId = new WorkoutIdentity( 12992, 9000, 9000);
-            var rret = new RemoveRoutineExerciseTransaction(newWId);
+            var newWId = new WorkoutIdentity( 12992, DayOfWeek.Friday, 9000);
+            var rret = new RemoveRoutineExerciseTransaction(newWId,0);
             rret.Execute();
         }
     }

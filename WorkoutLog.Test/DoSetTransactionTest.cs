@@ -19,7 +19,7 @@ namespace WorkoutLog.Test
         public void ShouldBePossibleToDoExerciseWithoutChangeWeightAndReps()
         {
             var exerciseId = 101;
-            var wId = new Workout.WorkoutIdentity(12, 61, 107);
+            var wId = new Workout.WorkoutIdentity(12, DayOfWeek.Monday, 107);
             CreateAndReturnRoutine(wId, exerciseId, 10, 50);
 
             var dayAndHour = DateTime.Now;
@@ -37,7 +37,7 @@ namespace WorkoutLog.Test
         public void ShouldBePossibleToDoExerciseChangingWeight()
         {
             var exerciseId = 101;
-            var wId = new Workout.WorkoutIdentity(124, 614, 1074);
+            var wId = new Workout.WorkoutIdentity(124, DayOfWeek.Monday, 1074);
             CreateAndReturnRoutine(wId, exerciseId, 10, 50);
 
             var dayAndHour = DateTime.Now;
@@ -56,7 +56,7 @@ namespace WorkoutLog.Test
         public void ShouldntBePossibleDoMoreExercisesThanAvailable()
         {
             var exerciseId = 1019;
-            var wId = new Workout.WorkoutIdentity(129, 619, 1097);
+            var wId = new Workout.WorkoutIdentity(129, DayOfWeek.Monday, 1097);
             CreateAndReturnRoutine(wId, exerciseId, 2, 50);
 
             var dayAndHour = DateTime.Now;
@@ -78,7 +78,7 @@ namespace WorkoutLog.Test
         public void ExerciseShouldBeFinishedAfterAllSets()
         {
             var exerciseId = 2019;
-            var wId = new Workout.WorkoutIdentity(229, 219, 2097);
+            var wId = new Workout.WorkoutIdentity(2829, DayOfWeek.Monday, 2097);
             CreateAndReturnRoutine(wId, exerciseId, 2, 50);
 
             var dayAndHour = DateTime.Now;

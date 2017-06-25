@@ -9,21 +9,22 @@ namespace WorkoutLog.Workout
     public class Routine : IRoutine
     {
         private string name;
-        private readonly WorkoutIdentity wId;
+        private readonly int routineId;
         private IDay[] days;
 
-        public Routine(WorkoutIdentity wId, string name,  IDay[] days)
+        public Routine(WorkoutIdentity wId, string name)
         {
-
-            this.days = days;
-            this.wId = wId;
+            
+            this.routineId = wId.RoutineId;
+            if (routineId <= 0)
+                throw new ArgumentException("routineId should be greater than zero");
             UpdateName(name);
+
+            days = new IDay[0];
         }
 
-        public int RoutineId => wId.RoutineId;
-
-        
-
+        public int RoutineId => routineId;
+       
         public string Name => name;
 
         public IDay[] Days { get => days; set => days = value; }

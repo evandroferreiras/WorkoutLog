@@ -17,24 +17,21 @@ namespace WorkoutLog.Test
         [TestMethod]
         public void ShouldBePossibleToAdd()
         {
-            var wId = new Workout.WorkoutIdentity(45, 45, 54);
+            var routineId = 45;
+            var dw = DayOfWeek.Monday;
+            var routineExerciseId = 1;
 
-            var routine = new RoutineBuilder(wId.RoutineId, "DefaultRoutine")
-                                            .AddNormalRoutineExercise(wId.DayId, wId.RoutineExerciseId, 10, 10, 50)
+            var routine = new RoutineBuilder(routineId, "DefaultRoutine")
+                                            .AddDayAndNormalRoutineExercise(dw, routineExerciseId, 10, 10, 50)
                                             .Build();
 
-            var art = new AddRoutineTransaction(wId, routine.Name, routine.Days);
-            art.Execute();
-
-            IRoutineExercise re = new NormalRoutineExercise(wId, 30, 10, 89.7);
-
-            var adt = new AddDayTransaction(wId,  new[] { re });
+            var adt = new AddDayTransaction(routineId, DayOfWeek.Monday);
             adt.Execute();
 
-            var returned = ReturnFirstRoutine(wId);
+            var returned = ReturnFirstRoutine(routineId);
             returned.Days.Should().HaveCount(2);
-            var day = returned.Days.FirstOrDefault(x => x.DayId == wId.DayId);
-            day.DayId.Should().Be(wId.DayId);
+            var day = returned.Days.FirstOrDefault(x => x.DayOfWeek == DayOfWeek.Monday);
+            day.DayOfWeek.Should().Be(DayOfWeek.Monday);
 
 
         }
@@ -43,17 +40,16 @@ namespace WorkoutLog.Test
         [ExpectedException(typeof(Exception), "The routine doesnt exist.")]
         public void ShouldntBePossibleToAddToAnInexistentRoutine()
         {
-            var wId = new Workout.WorkoutIdentity( 45, 45, 54);
-            var routine = new RoutineBuilder( wId.RoutineId, "DefaultRoutine")
-                                            .AddNormalRoutineExercise(wId.DayId, wId.RoutineExerciseId, 10, 10, 50)
+
+            var routineId = 45;
+            var dw = DayOfWeek.Monday;
+            var routineExerciseId = 1;
+
+            var routine = new RoutineBuilder(routineId, "DefaultRoutine")
+                                            .AddDayAndNormalRoutineExercise(dw, routineExerciseId, 10, 10, 50)
                                             .Build();
-            var art = new AddRoutineTransaction(wId, routine.Name, routine.Days);
-            art.Execute();
 
-            IRoutineExercise re = new NormalRoutineExercise(wId, 30, 10, 89.7);
-
-            var anotherWId = new WorkoutIdentity(7000, wId.DayId, wId.RoutineExerciseId);
-            var adt = new AddDayTransaction(anotherWId, new[] { re });
+            var adt = new AddDayTransaction(7000, DayOfWeek.Monday);
             adt.Execute();
         }
     }

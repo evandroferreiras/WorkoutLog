@@ -18,7 +18,7 @@ namespace WorkoutLog.Database
         static IList<ITrainingDay> tds = new List<ITrainingDay>();
         public static void SaveTrainingDay(ITrainingDay td)
         {
-            var trainingDay = tds.FirstOrDefault(x => (x.DayId == td.DayId && x.BeginDate.Equals(td.BeginDate)));
+            var trainingDay = tds.FirstOrDefault(x => (x.DayOfWeek == td.DayOfWeek && x.BeginDate.Equals(td.BeginDate)));
             if (trainingDay == null)
             {
                 tds.Add(td);
@@ -38,13 +38,7 @@ namespace WorkoutLog.Database
 
         public static ITrainingDay GetTrainingDay(TrainingIdentity tId)
         {
-            return tds.FirstOrDefault(x => x.DayId == tId.WId.DayId);
-        }
-
-        public static void UpdateTrainingRoutineExercise(TrainingIdentity tId, ITrainingRoutineExercise tre)
-        {
-
-
+            return tds.FirstOrDefault(  x => x.BeginDate == tId.DayAndHour && x.DayOfWeek == tId.WId.DayOfWeek);
         }
 
         internal static (int repNbr, double weight)[] DoRep((int repNbr, double weight)[] repsDone, double weight)

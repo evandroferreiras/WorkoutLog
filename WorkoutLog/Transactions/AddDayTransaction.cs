@@ -10,19 +10,23 @@ namespace WorkoutLog.Transactions
 {
     public class AddDayTransaction : ITransaction
     {
-        private WorkoutIdentity wId;
+        private readonly DayOfWeek dayOfWeek;
+        private readonly int routineId;
         private IRoutineExercise[] routineExercises;
 
-        public AddDayTransaction(WorkoutIdentity wId, IRoutineExercise[] routineExercises)
+        public AddDayTransaction(int routineId, DayOfWeek dayOfWeek)
         {
-            this.wId = wId;
-            this.routineExercises = routineExercises;
+
+            this.routineExercises = new IRoutineExercise[] { };
+            this.routineId = routineId;
+            this.dayOfWeek = dayOfWeek;
         }
 
         public void Execute()
         {
-            var day = new Day(wId, routineExercises);
-            WorkoutDatabase.AddDay(wId, day);
+            var routine = WorkoutDatabase.GetRoutine(routineId);
+            var day = new Day(dayOfWeek, routineExercises);
+            WorkoutDatabase.AddDay(routineId, day);
         }
     }
 }

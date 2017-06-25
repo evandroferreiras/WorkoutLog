@@ -5,7 +5,7 @@ namespace WorkoutLog.Training
     public interface ITrainingDay
     {
 
-        int DayId { get;  }
+        DayOfWeek DayOfWeek { get;  }
 
         ITrainingRoutineExercise[] TrainingRoutineExercises { get; }
         DateTime BeginDate { get; }

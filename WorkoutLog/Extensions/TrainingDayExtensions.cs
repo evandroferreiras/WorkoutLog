@@ -12,7 +12,7 @@ namespace WorkoutLog.Extensions
     {
         public static ITrainingDay ToTrainingDay(this IDay d, TrainingIdentity tId) 
         {
-            return new TrainingDay(tId,d.DayId, d.RoutineExercises.ToTrainingRoutineExercise());
+            return new TrainingDay(tId,d.DayOfWeek, d.RoutineExercises.ToTrainingRoutineExercise());
         }
 
         public static ITrainingDay[] ToTrainingDay(this IDay[] d, TrainingIdentity tId)

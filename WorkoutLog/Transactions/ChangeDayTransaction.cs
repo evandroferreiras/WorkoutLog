@@ -21,7 +21,7 @@ namespace WorkoutLog.Transactions
             IDay day = null;
             foreach (var item in routine.Days)
             {
-                if (item.DayId == wId.DayId)
+                if (item.DayOfWeek == wId.DayOfWeek)
                 {
                     day = item;
                     break;

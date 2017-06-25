@@ -19,7 +19,7 @@ namespace WorkoutLog.Test
         public void ShouldFinishTheTraining()
         {
             var exerciseId = 10221;
-            var wId = new Workout.WorkoutIdentity(122, 612, 10272);
+            var wId = new Workout.WorkoutIdentity(122, DayOfWeek.Monday, 10272);
             CreateAndReturnRoutine(wId, exerciseId, 10, 50);
 
             var dayAndHour = DateTime.Now;

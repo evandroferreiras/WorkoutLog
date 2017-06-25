@@ -10,23 +10,23 @@ namespace WorkoutLog.Training
     public class TrainingDay : ITrainingDay
     {
         private readonly TrainingIdentity _tId;
-        private readonly int dayId;
+        private readonly DayOfWeek dayOfWeek;
         private ITrainingRoutineExercise[] tre;
         private DateTime _endDate;
 
-        public TrainingDay(TrainingIdentity tId, int dayId, ITrainingRoutineExercise[] tre)
+        public TrainingDay(TrainingIdentity tId, DayOfWeek dayOfWeek, ITrainingRoutineExercise[] tre)
         {
-            this.dayId = dayId;
+            this.dayOfWeek = dayOfWeek;
 
             this.tre = tre;
             this._tId = tId;
         }
 
-        public int DayId
+        public DayOfWeek DayOfWeek
         {
             get
             {
-                return dayId;
+                return dayOfWeek;
             }
         }
 

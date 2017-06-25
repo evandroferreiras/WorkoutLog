@@ -18,7 +18,7 @@ namespace WorkoutLog.Test
         private int firstExercise = 101;
         private int secondExercise = 102;
         private int thirdExercise = 103;
-        Workout.WorkoutIdentity wId = new Workout.WorkoutIdentity(12, 61, 107);
+        Workout.WorkoutIdentity wId = new Workout.WorkoutIdentity(12, DayOfWeek.Monday, 107);
         TrainingIdentity tId;
 
         public GetNextExerciseTest()
@@ -35,13 +35,10 @@ namespace WorkoutLog.Test
             tId = new TrainingIdentity(wId, DateTime.Now);
 
             var routine = new RoutineBuilder(wId.RoutineId, "Default")
-              .AddNormalRoutineExercise(wId.DayId, wId.RoutineExerciseId, firstExercise, 1, 10)
-              .AddNormalRoutineExercise(wId.DayId, wId.RoutineExerciseId, secondExercise, 1, 10)
-              .AddNormalRoutineExercise(wId.DayId, wId.RoutineExerciseId, thirdExercise, 1, 10)
+              .AddDayAndNormalRoutineExercise(DayOfWeek.Friday, wId.RoutineExerciseId, firstExercise, 1, 10)
+              .AddDayAndNormalRoutineExercise(DayOfWeek.Monday, wId.RoutineExerciseId, secondExercise, 1, 10)
+              .AddDayAndNormalRoutineExercise(DayOfWeek.Thursday, wId.RoutineExerciseId, thirdExercise, 1, 10)
               .Build();
-
-            var addRoutineTransaction = new AddRoutineTransaction(wId, routine.Name, routine.Days);
-            addRoutineTransaction.Execute();
             
             var srt = new StartTrainingDayTransaction(tId);
             srt.Execute();
@@ -52,7 +49,15 @@ namespace WorkoutLog.Test
         [TestMethod]
         public void ShouldReturnTheFirstExercise()
         {
-            var td = TrainingDayDatabase.GetTrainingDay(tId);
+            var _wId = new Workout.WorkoutIdentity(12, DayOfWeek.Friday, 107);
+            var _tId = new TrainingIdentity(_wId, tId.DayAndHour);
+            var srt = new StartTrainingDayTransaction(_tId);
+            srt.Execute();
+
+            var td = TrainingDayDatabase.GetTrainingDay(_tId);
+
+
+
             var tre = td.GetNextExercise();
             tre.ExerciseId.Should().Be(firstExercise);
         }

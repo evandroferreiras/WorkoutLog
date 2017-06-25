@@ -24,9 +24,7 @@ namespace WorkoutLog.Transactions
         }
 
         public void Execute()
-        {
-
-            
+        {            
             var nre = new NormalRoutineExercise(wId, exerciseId, reps, weight);
             WorkoutDatabase.AddRoutineExercise(wId, nre);
         }

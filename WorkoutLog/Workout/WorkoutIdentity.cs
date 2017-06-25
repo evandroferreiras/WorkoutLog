@@ -9,7 +9,7 @@ namespace WorkoutLog.Workout
     public struct WorkoutIdentity
     {
         public int RoutineId { get; }
-        public int DayId { get; }
+        public DayOfWeek DayOfWeek { get; }
         public int RoutineExerciseId { get; }
 
         public WorkoutIdentity( int routineId) : this()
@@ -17,12 +17,12 @@ namespace WorkoutLog.Workout
             this.RoutineId = routineId;
         }
 
-        public WorkoutIdentity( int routineId, int dayId) : this( routineId)
+        public WorkoutIdentity( int routineId, DayOfWeek day) : this( routineId)
         {
-            this.DayId = dayId;
+            this.DayOfWeek = day;
         }
 
-        public WorkoutIdentity( int routineId, int dayId, int routineExerciseId) : this(routineId, dayId)
+        public WorkoutIdentity( int routineId, DayOfWeek day, int routineExerciseId) : this(routineId, day)
         {
             this.RoutineExerciseId = routineExerciseId;
         }

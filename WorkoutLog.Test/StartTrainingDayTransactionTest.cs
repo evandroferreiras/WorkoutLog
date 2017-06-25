@@ -12,7 +12,7 @@ using WorkoutLog.Transactions;
 namespace WorkoutLog.Test
 {
 
-    //TODO: Create a FinishTrainingDayTransaction
+
     [TestClass]
     public class StartTrainingDayTransactionTest : BaseTest
     {
@@ -20,7 +20,7 @@ namespace WorkoutLog.Test
         public void ShouldBePossibleToStartATrainingRoutine()
         {
             var exerciseId = 10;
-            var wId = new Workout.WorkoutIdentity( 1, 1, 102);
+            var wId = new Workout.WorkoutIdentity( 1, DayOfWeek.Monday, 102);
             CreateAndReturnRoutine(wId, exerciseId, 10, 50);
 
             var dayAndHour = DateTime.Now;

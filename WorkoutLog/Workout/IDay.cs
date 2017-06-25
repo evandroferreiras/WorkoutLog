@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace WorkoutLog.Workout
 {
     public interface IDay
     {
-        int DayId { get; }
+        DayOfWeek DayOfWeek { get; }
         IRoutineExercise[] RoutineExercises { get; set; }
         
     }
