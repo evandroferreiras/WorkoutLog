@@ -3,14 +3,14 @@
   <Class Name="WorkoutLog.Database.TrainingDayDatabase" Collapsed="true">
     <Position X="11" Y="8" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAAACAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAiQAA=</HashCode>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIBiQAA=</HashCode>
       <FileName>Database\TrainingDayDatabase.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WorkoutLog.Database.WorkoutDatabase" Collapsed="true">
     <Position X="9.25" Y="8" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QIAgAAAAAAEABCAAAQAAAAAAAIAAAAAIAAAAAAAAAgA=</HashCode>
+      <HashCode>QAAgAAAAAAAABCAAAQAAAAAAAIAAAAAIAAAAAABAAgA=</HashCode>
       <FileName>Database\WorkoutDatabase.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -31,7 +31,7 @@
   <Class Name="WorkoutLog.Training.TrainingDay" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="10.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAACAAgAAAAAQIAAAAAAAAAAAAQAAAAAAAAAAABAAA=</HashCode>
+      <HashCode>AAAACAAABAAAAAIAAAAAAAAgEAAQAAAAAAAEAIAAAAA=</HashCode>
       <FileName>Training\TrainingDay.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -39,7 +39,7 @@
   <Class Name="WorkoutLog.Training.TrainingRoutineExercise" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="10.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAACAAAAAAASEEAAEgACAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAACAAAAAAASEEAAEgACAAEAAAAAAAAAAAA=</HashCode>
       <FileName>Training\TrainingRoutineExercise.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -47,15 +47,15 @@
   <Class Name="WorkoutLog.Transactions.AddRoutineTransaction" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="0.5" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAQAAAAAAAAAAAAEAAAAAAAAAEAAAAA=</HashCode>
-      <FileName>Transactions\AddWorkoutTransaction.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAQQAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Transactions\AddRoutineTransaction.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="WorkoutLog.Transactions.ChangeDayTransaction" Collapsed="true">
-    <Position X="1.75" Y="1.75" Width="1.5" />
+    <Position X="0.75" Y="1.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAECAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAACAAABAAAAQAAAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Transactions\ChangeDayTransaction.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -67,16 +67,16 @@
     </TypeIdentifier>
   </Class>
   <Class Name="WorkoutLog.Transactions.ChangeRoutineExerciseTransaction" Collapsed="true">
-    <Position X="1.75" Y="3.25" Width="1.5" />
+    <Position X="0.75" Y="3.25" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAAAAIAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAIAAAAgABAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Transactions\ChangeRoutineExerciseTransaction.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WorkoutLog.Transactions.ChangeRoutineTransaction" Collapsed="true">
-    <Position X="1.75" Y="0.5" Width="1.5" />
+    <Position X="1.75" Y="0.5" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAAECAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAACAAAAAAAAQQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Transactions\ChangeRoutineTransaction.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -91,15 +91,15 @@
   <Class Name="WorkoutLog.Transactions.DoSetTransaction" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="2.75" Y="5.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAIAAAAAAAAAAQAAAAQAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAABAAAAAQAACAQAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
       <FileName>Transactions\DoSetTransaction.cs</FileName>
     </TypeIdentifier>
-    <Lollipop Position="0.2" Collapsed="true" />
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="WorkoutLog.Transactions.StartTrainingDayTransaction" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="0.5" Y="6.75" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAIAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAABAAAAQQAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Transactions\StartTrainingDayTransaction.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -111,7 +111,7 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>EAAEAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <HashCode>EAAAAAAABAAAAAAAAAIAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
       <FileName>Workout\Day.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -130,7 +130,7 @@
       <Compartment Name="Methods" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>AAAEAAABAAAAAAAAAAAAAAQAAAAEAAAAQAAAAEAAAAQ=</HashCode>
+      <HashCode>AAAAAAABAAAAAQAAAAAAAAQAAAAEAAAAQAAAAEAAAAQ=</HashCode>
       <FileName>Workout\Routine.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -138,7 +138,7 @@
   <Class Name="WorkoutLog.Workout.RoutineExercise" Collapsed="true">
     <Position X="12.5" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAABAAAAAAAAAAQEAAAEDAAAAAgAAAAAAAAABA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQEAAAFDAAAAAgAAAAAAAAABA=</HashCode>
       <FileName>Workout\RoutineExercise.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -146,7 +146,7 @@
   <Class Name="WorkoutLog.Transactions.AddDayTransaction" Collapsed="true">
     <Position X="0.5" Y="7.75" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAEEAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAEAAABAAAAQQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Transactions\AddDayTransaction.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -154,7 +154,7 @@
   <Class Name="WorkoutLog.Transactions.AddNormalRoutineExerciseTransaction" Collapsed="true">
     <Position X="0.5" Y="8.75" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAQAAAAQEAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAABAAAAQQAAAAQEAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
       <FileName>Transactions\AddNormalRoutineExerciseTransaction.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -169,7 +169,7 @@
   <Class Name="WorkoutLog.Transactions.RemoveDayTransaction" Collapsed="true">
     <Position X="0.5" Y="9.75" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAABAAAAQQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Transactions\RemoveDayTransaction.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -177,36 +177,22 @@
   <Class Name="WorkoutLog.Transactions.RemoveRoutineExerciseTransaction" Collapsed="true">
     <Position X="0.5" Y="10.75" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAABAAAAQQAAAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Transactions\RemoveRoutineExerciseTransaction.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Struct Name="WorkoutLog.Training.TrainingIdentity" Collapsed="true">
-    <Position X="7" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAABAA=</HashCode>
-      <FileName>Training\TrainingIdentity.cs</FileName>
-    </TypeIdentifier>
-  </Struct>
-  <Struct Name="WorkoutLog.Workout.WorkoutIdentity" Collapsed="true">
-    <Position X="8.75" Y="4.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAABBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
-      <FileName>Workout\WorkoutIdentity.cs</FileName>
-    </TypeIdentifier>
-  </Struct>
   <Interface Name="WorkoutLog.Training.ITrainingDay" Collapsed="true">
     <Position X="12.25" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAACAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <HashCode>AAAACAAAAAAAAAIAAAAAAAAgAAAAAAAAAAAEAIAAAAA=</HashCode>
       <FileName>Training\ITrainingDay.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="WorkoutLog.Training.ITrainingRoutineExercise" Collapsed="true">
     <Position X="8.75" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAACAEAAEAACAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAEAAEAACAAEAAAAAAAAAAAA=</HashCode>
       <FileName>Training\ITrainingRoutineExercise.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -220,7 +206,7 @@
   <Interface Name="WorkoutLog.Workout.IDay" Collapsed="true">
     <Position X="7" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
       <FileName>Workout\IDay.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -234,7 +220,7 @@
   <Interface Name="WorkoutLog.Workout.IRoutineExercise" Collapsed="true">
     <Position X="10.5" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAABAAAAAAAAAAAAAAAEDAAAAAAAAAAAAAAABA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEDAAAAAAAAAAAAAAABA=</HashCode>
       <FileName>Workout\IRoutineExercise.cs</FileName>
     </TypeIdentifier>
   </Interface>

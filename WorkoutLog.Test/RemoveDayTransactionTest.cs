@@ -16,7 +16,7 @@ namespace WorkoutLog.Test
         [TestMethod]
         public void ShouldBePossibleToRemoveADay()
         {
-            var wId = new Workout.WorkoutIdentity(4587687, DayOfWeek.Monday, 54);
+            var wId = new WorkoutIdentity(4587687, DayOfWeek.Monday, 54);
 
             var routine = new RoutineBuilder(wId.RoutineId, "DefaultRoutine")
                                             .AddDayAndNormalRoutineExercise(wId.DayOfWeek, wId.RoutineExerciseId, 10, 10, 50)
@@ -25,10 +25,10 @@ namespace WorkoutLog.Test
             
             
 
-            var rdt = new RemoveDayTransaction(wId);
+            var rdt = new RemoveDayTransaction(wId.RoutineId, wId.DayOfWeek);
             rdt.Execute();
 
-            var returned = ReturnFirstRoutine(wId);
+            var returned = ReturnFirstRoutine(wId.RoutineId);
             returned.Days.Should().HaveCount(0);
 
         }
@@ -37,7 +37,7 @@ namespace WorkoutLog.Test
         [ExpectedException(typeof(Exception), "The day doesnt exist.")]
         public void ShouldntBePossibleToRemoveAInexistentDay()
         {
-            var wId = new Workout.WorkoutIdentity( 44325, DayOfWeek.Monday, 54432);
+            var wId = new WorkoutIdentity( 44325, DayOfWeek.Monday, 54432);
             var differentDay = DayOfWeek.Tuesday;
 
             var routine = new RoutineBuilder(wId.RoutineId, "DefaultRoutine")
@@ -47,7 +47,7 @@ namespace WorkoutLog.Test
             
             
 
-            var rdt = new RemoveDayTransaction(wId);
+            var rdt = new RemoveDayTransaction(wId.RoutineId, wId.DayOfWeek);
             rdt.Execute();
 
         }
@@ -66,8 +66,8 @@ namespace WorkoutLog.Test
             
             
 
-            var anotherWId = new Workout.WorkoutIdentity(anotherRoutine, DayOfWeek.Monday, 544543);
-            var rdt = new RemoveDayTransaction(anotherWId);
+            var anotherWId = new WorkoutIdentity(anotherRoutine, DayOfWeek.Monday, 544543);
+            var rdt = new RemoveDayTransaction(anotherWId.RoutineId, anotherWId.DayOfWeek);
             rdt.Execute();
 
         }

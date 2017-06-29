@@ -10,6 +10,42 @@ using WorkoutLog.Workout;
 
 namespace WorkoutLog.Test.Base
 {
+    public struct TrainingIdentity
+    {
+
+        public TrainingIdentity(int routineId, DayOfWeek dayOfWeek, DateTime dayAndHour)
+        {
+            DayAndHour = dayAndHour;
+            this.RoutineId = routineId;
+            this.DayOfWeek = dayOfWeek;
+        }
+        public int RoutineId { get; private set; }
+        public DayOfWeek DayOfWeek { get; private set; }
+        public DateTime DayAndHour { get; private set; }
+    }
+
+    public struct WorkoutIdentity
+    {
+        public int RoutineId { get; }
+        public DayOfWeek DayOfWeek { get; }
+        public int RoutineExerciseId { get; }
+
+        public WorkoutIdentity(int routineId) : this()
+        {
+            this.RoutineId = routineId;
+        }
+
+        public WorkoutIdentity(int routineId, DayOfWeek day) : this(routineId)
+        {
+            this.DayOfWeek = day;
+        }
+
+        public WorkoutIdentity(int routineId, DayOfWeek day, int routineExerciseId) : this(routineId, day)
+        {
+            this.RoutineExerciseId = routineExerciseId;
+        }
+    }
+
     public class RoutineBuilder 
     {
 
@@ -32,7 +68,7 @@ namespace WorkoutLog.Test.Base
         {
             var id = new WorkoutIdentity(routineId, dayOfWeek, routineExerciseId);
 
-            var nre = new NormalRoutineExercise(id, exerciseId, reps, weight);
+            var nre = new NormalRoutineExercise(exerciseId, reps, weight);
 
             var day = days.FirstOrDefault(x => x.DayOfWeek == dayOfWeek);
             if (day == null)
@@ -50,9 +86,9 @@ namespace WorkoutLog.Test.Base
                 throw new ArgumentNullException("It's necessary define the days");
 
             var wId = new WorkoutIdentity(routineId);
-            var routine = new Routine(wId, name);
+            var routine = new Routine(routineId, name);
 
-            var art = new AddRoutineTransaction(wId, routine.Name);
+            var art = new AddRoutineTransaction(routineId, routine.Name);
             art.Execute();
 
             foreach (var d in days)
@@ -62,7 +98,7 @@ namespace WorkoutLog.Test.Base
 
                 foreach (var re in d.RoutineExercises)
                 {
-                    var anret = new AddNormalRoutineExerciseTransaction(new WorkoutIdentity(routineId,d.DayOfWeek),re.ExerciseId,re.Reps,re.Weight);
+                    var anret = new AddNormalRoutineExerciseTransaction(routineId,d.DayOfWeek,re.ExerciseId,re.Reps,re.Weight);
                     anret.Execute();
                 }
             }
@@ -90,12 +126,5 @@ namespace WorkoutLog.Test.Base
 
             return routineUpdated;
         }
-
-        [Obsolete]
-        internal static IRoutine ReturnFirstRoutine(WorkoutIdentity wId)
-        {
-            return ReturnFirstRoutine(wId.RoutineId);
-        }
-
     }
 }

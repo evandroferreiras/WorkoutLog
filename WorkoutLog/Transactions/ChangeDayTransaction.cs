@@ -9,11 +9,13 @@ namespace WorkoutLog.Transactions
 {
     public abstract class ChangeDayTransaction : ChangeRoutineTransaction
     {
-        private readonly WorkoutIdentity wId;
+        private readonly DayOfWeek dayOfWeek;
+        private readonly int routineId;
 
-        protected ChangeDayTransaction(WorkoutIdentity wId) : base(wId)
+        protected ChangeDayTransaction(int routineId, DayOfWeek dayOfWeek) : base(routineId)
         {
-            this.wId = wId;
+            this.routineId = routineId;
+            this.dayOfWeek = dayOfWeek;
         }
 
         public override void ExecuteChange(IRoutine routine)
@@ -21,7 +23,7 @@ namespace WorkoutLog.Transactions
             IDay day = null;
             foreach (var item in routine.Days)
             {
-                if (item.DayOfWeek == wId.DayOfWeek)
+                if (item.DayOfWeek == dayOfWeek)
                 {
                     day = item;
                     break;

@@ -11,7 +11,7 @@ namespace WorkoutLog.Transactions
     {
         private readonly double weight;
 
-        public ChangeWeightTransaction(int routineExerciseIdx, WorkoutIdentity wId, double weight) : base(routineExerciseIdx,wId)
+        public ChangeWeightTransaction(int routineId, DayOfWeek dayOfWeek, int routineExerciseIdx, double weight) : base(routineId, dayOfWeek, routineExerciseIdx)
         {
             this.weight = weight;
         }

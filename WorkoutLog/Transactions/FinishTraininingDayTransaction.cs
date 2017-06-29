@@ -10,19 +10,20 @@ namespace WorkoutLog.Transactions
 {
     public class FinishTraininingDayTransaction : ITransaction
     {
+        private readonly DateTime dayAndHour;
+        private readonly DayOfWeek dayOfWeek;
         private readonly DateTime endDate;
-        private readonly TrainingIdentity tId;
 
-        public FinishTraininingDayTransaction(TrainingIdentity tId, DateTime endDate)
+        public FinishTraininingDayTransaction(DayOfWeek dayOfWeek, DateTime dayAndHour, DateTime endDate)
         {
-            this.tId = tId;
             this.endDate = endDate;
+            this.dayOfWeek = dayOfWeek;
+            this.dayAndHour = dayAndHour;
         }
 
         public void Execute()
         {
-
-            var td = TrainingDayDatabase.GetTrainingDay(tId);
+            var td = TrainingDayDatabase.GetTrainingDay(dayOfWeek, dayAndHour);
             td.EndDate = endDate;
             TrainingDayDatabase.SaveTrainingDay(td);
         }

@@ -11,7 +11,7 @@ namespace WorkoutLog.Transactions
     {
         private readonly string name;
 
-        public ChangeRoutineNameTransaction(WorkoutIdentity wId, string name) : base(wId)
+        public ChangeRoutineNameTransaction(int routineId, string name) : base(routineId)
         {
             this.name = name;
         }

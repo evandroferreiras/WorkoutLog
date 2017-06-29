@@ -8,18 +8,18 @@ using WorkoutLog.Database;
 namespace WorkoutLog.Training
 {
     public class TrainingDay : ITrainingDay
-    {
-        private readonly TrainingIdentity _tId;
+    {      
         private readonly DayOfWeek dayOfWeek;
         private ITrainingRoutineExercise[] tre;
         private DateTime _endDate;
+        private DateTime _dayAndHour;
 
-        public TrainingDay(TrainingIdentity tId, DayOfWeek dayOfWeek, ITrainingRoutineExercise[] tre)
+        public TrainingDay(DateTime dayAndHour, DayOfWeek dayOfWeek, ITrainingRoutineExercise[] tre)
         {
             this.dayOfWeek = dayOfWeek;
 
             this.tre = tre;
-            this._tId = tId;
+            this._dayAndHour = dayAndHour;
         }
 
         public DayOfWeek DayOfWeek
@@ -33,7 +33,7 @@ namespace WorkoutLog.Training
         public DateTime BeginDate
         {
             get {
-                return _tId.DayAndHour;
+                return _dayAndHour;
             }
         }
 

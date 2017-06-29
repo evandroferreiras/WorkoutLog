@@ -18,7 +18,7 @@ namespace WorkoutLog.Test
         private int firstExercise = 101;
         private int secondExercise = 102;
         private int thirdExercise = 103;
-        Workout.WorkoutIdentity wId = new Workout.WorkoutIdentity(12, DayOfWeek.Monday, 107);
+        WorkoutIdentity wId = new WorkoutIdentity(12, DayOfWeek.Monday, 107);
         TrainingIdentity tId;
 
         public GetNextExerciseTest()
@@ -32,7 +32,7 @@ namespace WorkoutLog.Test
             WorkoutDatabase.Clear();
             TrainingDayDatabase.Clear();
 
-            tId = new TrainingIdentity(wId, DateTime.Now);
+            tId = new TrainingIdentity(wId.RoutineId, wId.DayOfWeek, DateTime.Now);
 
             var routine = new RoutineBuilder(wId.RoutineId, "Default")
               .AddDayAndNormalRoutineExercise(DayOfWeek.Friday, wId.RoutineExerciseId, firstExercise, 1, 10)
@@ -40,7 +40,7 @@ namespace WorkoutLog.Test
               .AddDayAndNormalRoutineExercise(DayOfWeek.Thursday, wId.RoutineExerciseId, thirdExercise, 1, 10)
               .Build();
             
-            var srt = new StartTrainingDayTransaction(tId);
+            var srt = new StartTrainingDayTransaction(tId.RoutineId, tId.DayOfWeek, tId.DayAndHour);
             srt.Execute();
 
 
@@ -49,12 +49,12 @@ namespace WorkoutLog.Test
         [TestMethod]
         public void ShouldReturnTheFirstExercise()
         {
-            var _wId = new Workout.WorkoutIdentity(12, DayOfWeek.Friday, 107);
-            var _tId = new TrainingIdentity(_wId, tId.DayAndHour);
-            var srt = new StartTrainingDayTransaction(_tId);
+            var _wId = new WorkoutIdentity(12, DayOfWeek.Friday, 107);
+            var tId = new TrainingIdentity(_wId.RoutineId, _wId.DayOfWeek, this.tId.DayAndHour);
+            var srt = new StartTrainingDayTransaction(tId.RoutineId, tId.DayOfWeek, tId.DayAndHour);
             srt.Execute();
 
-            var td = TrainingDayDatabase.GetTrainingDay(_tId);
+            var td = TrainingDayDatabase.GetTrainingDay(tId.DayOfWeek, tId.DayAndHour);
 
 
 
@@ -65,10 +65,10 @@ namespace WorkoutLog.Test
         [TestMethod]
         public void ShouldReturnTheSecondExercise()
         {
-            var doSetTransaction = new DoSetTransaction(tId, firstExercise, 10);
+            var doSetTransaction = new DoSetTransaction(tId.DayOfWeek, tId.DayAndHour, firstExercise, 10);
             doSetTransaction.Execute();
 
-            var td = TrainingDayDatabase.GetTrainingDay(tId);
+            var td = TrainingDayDatabase.GetTrainingDay(tId.DayOfWeek, tId.DayAndHour);
             var tre = td.GetNextExercise();
             tre.ExerciseId.Should().Be(secondExercise);
         }
@@ -76,13 +76,13 @@ namespace WorkoutLog.Test
         [TestMethod]
         public void ShouldReturnNextExerciseEvenWithoutOrder()
         {
-            var doSetTransaction = new DoSetTransaction(tId, firstExercise, 10);
+            var doSetTransaction = new DoSetTransaction(tId.DayOfWeek, tId.DayAndHour, firstExercise, 10);
             doSetTransaction.Execute();
 
-            doSetTransaction = new DoSetTransaction(tId, thirdExercise, 10);
+            doSetTransaction = new DoSetTransaction(tId.DayOfWeek, tId.DayAndHour, thirdExercise, 10);
             doSetTransaction.Execute();
 
-            var td = TrainingDayDatabase.GetTrainingDay(tId);
+            var td = TrainingDayDatabase.GetTrainingDay(tId.DayOfWeek, tId.DayAndHour);
             var tre = td.GetNextExercise();
             tre.ExerciseId.Should().Be(secondExercise);
         }
@@ -90,16 +90,16 @@ namespace WorkoutLog.Test
         [TestMethod]
         public void ShouldntReturnAnyExercise()
         {
-            var doSetTransaction = new DoSetTransaction(tId, firstExercise, 10);
+            var doSetTransaction = new DoSetTransaction(tId.DayOfWeek, tId.DayAndHour, firstExercise, 10);
             doSetTransaction.Execute();
 
-            doSetTransaction = new DoSetTransaction(tId, secondExercise, 10);
+            doSetTransaction = new DoSetTransaction(tId.DayOfWeek, tId.DayAndHour, secondExercise, 10);
             doSetTransaction.Execute();
 
-            doSetTransaction = new DoSetTransaction(tId, thirdExercise, 10);
+            doSetTransaction = new DoSetTransaction(tId.DayOfWeek, tId.DayAndHour, thirdExercise, 10);
             doSetTransaction.Execute();
 
-            var td = TrainingDayDatabase.GetTrainingDay(tId);
+            var td = TrainingDayDatabase.GetTrainingDay(tId.DayOfWeek, tId.DayAndHour);
             var tre = td.GetNextExercise();
             tre.Should().BeNull();
         }

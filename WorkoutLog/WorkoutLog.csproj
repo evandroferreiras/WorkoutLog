@@ -50,7 +50,6 @@
     <Compile Include="Extensions\RoutineExerciseExtension.cs" />
     <Compile Include="Extensions\TrainingDayExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Training\TrainingIdentity.cs" />
     <Compile Include="Transactions\AddDayTransaction.cs" />
     <Compile Include="Transactions\AddNormalRoutineExerciseTransaction.cs" />
     <Compile Include="Transactions\AddRoutineTransaction.cs" />
@@ -68,7 +67,6 @@
     <Compile Include="Transactions\StartTrainingDayTransaction.cs" />
     <Compile Include="Workout\Day.cs" />
     <Compile Include="Workout\IDay.cs" />
-    <Compile Include="Workout\WorkoutIdentity.cs" />
     <Compile Include="Workout\IRoutine.cs" />
     <Compile Include="Workout\IRoutineExercise.cs" />
     <Compile Include="Training\ITrainingDay.cs" />
@@ -78,7 +76,6 @@
     <Compile Include="Workout\RoutineExercise.cs" />
     <Compile Include="Training\TrainingDay.cs" />
     <Compile Include="Training\TrainingRoutineExercise.cs" />
-    <Compile Include="Workout\Workout.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

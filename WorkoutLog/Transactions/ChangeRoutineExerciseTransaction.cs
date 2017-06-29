@@ -7,18 +7,15 @@ namespace WorkoutLog.Transactions
     public abstract class ChangeRoutineExerciseTransaction : ChangeDayTransaction
     {
         private readonly int routineExerciseIdx;
-        private readonly WorkoutIdentity wId;
 
-        protected ChangeRoutineExerciseTransaction(int routineExerciseIdx, WorkoutIdentity wId) : base(wId)
+        protected ChangeRoutineExerciseTransaction(int routineId, DayOfWeek dayOfWeek, int routineExerciseIdx) : base(routineId, dayOfWeek)
         {
-            this.wId = wId;
             this.routineExerciseIdx = routineExerciseIdx;
         }
 
         public override void ChangeDay(IDay day)
         {
-            IRoutineExercise routineExercise = day.RoutineExercises[routineExerciseIdx];
-
+            var routineExercise = day.RoutineExercises[routineExerciseIdx];
 
             if (routineExercise != null)
                 ChangeRoutineExercise(routineExercise);

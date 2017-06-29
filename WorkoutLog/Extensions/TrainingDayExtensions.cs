@@ -10,17 +10,17 @@ namespace WorkoutLog.Extensions
 {
     public static class TrainingDayExtensions
     {
-        public static ITrainingDay ToTrainingDay(this IDay d, TrainingIdentity tId) 
+        public static ITrainingDay ToTrainingDay(this IDay d, DateTime dayAndHour) 
         {
-            return new TrainingDay(tId,d.DayOfWeek, d.RoutineExercises.ToTrainingRoutineExercise());
+            return new TrainingDay(dayAndHour, d.DayOfWeek, d.RoutineExercises.ToTrainingRoutineExercise());
         }
 
-        public static ITrainingDay[] ToTrainingDay(this IDay[] d, TrainingIdentity tId)
+        public static ITrainingDay[] ToTrainingDay(this IDay[] d, DateTime dayAndHour)
         {
             var tds = new ITrainingDay[d.Length];
             var i = 0;
             foreach (var item in d)            
-                tds[i++] = item.ToTrainingDay(tId);
+                tds[i++] = item.ToTrainingDay(dayAndHour);
 
             return tds;
             

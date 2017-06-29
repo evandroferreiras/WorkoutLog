@@ -10,18 +10,21 @@ namespace WorkoutLog.Transactions
 {
     public class RemoveRoutineExerciseTransaction : ITransaction
     {
+        private readonly int routineId;
+        private readonly DayOfWeek dayOfWeek;
         private readonly int routineExerciseIdx;
-        private WorkoutIdentity wId;
 
-        public RemoveRoutineExerciseTransaction(WorkoutIdentity wId, int routineExerciseIdx)
+        public RemoveRoutineExerciseTransaction(int routineId, DayOfWeek dayOfWeek, int routineExerciseIdx)
         {
-            this.wId = wId;
+
             this.routineExerciseIdx = routineExerciseIdx;
+            this.dayOfWeek = dayOfWeek;
+            this.routineId = routineId;
         }
 
         public void Execute()
         {
-            WorkoutDatabase.RemoveRoutineExercise(wId, routineExerciseIdx);
+            WorkoutDatabase.RemoveRoutineExercise(routineId, dayOfWeek, routineExerciseIdx);
         }
     }
 }

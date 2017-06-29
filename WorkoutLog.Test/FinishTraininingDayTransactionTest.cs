@@ -19,19 +19,19 @@ namespace WorkoutLog.Test
         public void ShouldFinishTheTraining()
         {
             var exerciseId = 10221;
-            var wId = new Workout.WorkoutIdentity(122, DayOfWeek.Monday, 10272);
+            var wId = new WorkoutIdentity(122, DayOfWeek.Monday, 10272);
             CreateAndReturnRoutine(wId, exerciseId, 10, 50);
 
             var dayAndHour = DateTime.Now;
-            var tId = new TrainingIdentity(wId, dayAndHour);
-            var srt = new StartTrainingDayTransaction(tId);
+            var tId = new TrainingIdentity(wId.RoutineId, wId.DayOfWeek, dayAndHour);
+            var srt = new StartTrainingDayTransaction(tId.RoutineId, tId.DayOfWeek, tId.DayAndHour);
             srt.Execute();
 
             var endDate = DateTime.Now;
-            var ftt = new FinishTraininingDayTransaction(tId, endDate);
+            var ftt = new FinishTraininingDayTransaction(tId.DayOfWeek, tId.DayAndHour, endDate);
             ftt.Execute();
 
-            var td = TrainingDayDatabase.GetTrainingDay(tId);
+            var td = TrainingDayDatabase.GetTrainingDay(tId.DayOfWeek, tId.DayAndHour);
 
             td.EndDate.Should().Be(endDate);
         }

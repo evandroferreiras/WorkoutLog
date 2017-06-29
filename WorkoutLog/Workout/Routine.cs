@@ -12,10 +12,10 @@ namespace WorkoutLog.Workout
         private readonly int routineId;
         private IDay[] days;
 
-        public Routine(WorkoutIdentity wId, string name)
+        public Routine(int routineId, string name)
         {
             
-            this.routineId = wId.RoutineId;
+            this.routineId = routineId;
             if (routineId <= 0)
                 throw new ArgumentException("routineId should be greater than zero");
             UpdateName(name);

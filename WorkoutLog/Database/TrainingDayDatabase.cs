@@ -30,15 +30,16 @@ namespace WorkoutLog.Database
             }            
         }
 
-        public static ITrainingRoutineExercise GetTrainingRoutineExercise(TrainingIdentity tId, int exerciseId)
+        public static ITrainingRoutineExercise GetTrainingRoutineExercise(DayOfWeek dayOfWeek, DateTime dayAndHour, int exerciseId)
         {
-            var td = GetTrainingDay(tId);
+            var td = GetTrainingDay(dayOfWeek,dayAndHour);
             return td.TrainingRoutineExercises.FirstOrDefault(x => x.ExerciseId == exerciseId);
         }
 
-        public static ITrainingDay GetTrainingDay(TrainingIdentity tId)
+        public static ITrainingDay GetTrainingDay(DayOfWeek dayOfWeek, DateTime dayAndHour)
         {
-            return tds.FirstOrDefault(  x => x.BeginDate == tId.DayAndHour && x.DayOfWeek == tId.WId.DayOfWeek);
+            return tds.FirstOrDefault(  x =>  x.BeginDate == dayAndHour &&                                         
+                                              x.DayOfWeek == dayOfWeek);
         }
 
         internal static (int repNbr, double weight)[] DoRep((int repNbr, double weight)[] repsDone, double weight)

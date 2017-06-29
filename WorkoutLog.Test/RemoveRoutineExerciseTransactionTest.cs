@@ -24,10 +24,10 @@ namespace WorkoutLog.Test
             
             
 
-            var rret = new RemoveRoutineExerciseTransaction(wId,0);
+            var rret = new RemoveRoutineExerciseTransaction(wId.RoutineId, wId.DayOfWeek, 0);
             rret.Execute();
 
-            var returned = ReturnFirstRoutine(wId);
+            var returned = ReturnFirstRoutine(wId.RoutineId);
             var day = returned.Days.First(x => x.DayOfWeek == wId.DayOfWeek);
             day.RoutineExercises.Should().HaveCount(0);
 
@@ -48,7 +48,7 @@ namespace WorkoutLog.Test
             
 
             var newWId = new WorkoutIdentity(12992, DayOfWeek.Monday, 9000);
-            var rret = new RemoveRoutineExerciseTransaction(newWId,1);
+            var rret = new RemoveRoutineExerciseTransaction(newWId.RoutineId, newWId.DayOfWeek, 1);
             rret.Execute();
         }
 
@@ -66,7 +66,7 @@ namespace WorkoutLog.Test
             
 
             var newWId = new WorkoutIdentity( 12992, DayOfWeek.Friday, 9000);
-            var rret = new RemoveRoutineExerciseTransaction(newWId,0);
+            var rret = new RemoveRoutineExerciseTransaction(newWId.RoutineId, newWId.DayOfWeek, 0);
             rret.Execute();
         }
     }

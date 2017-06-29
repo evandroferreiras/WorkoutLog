@@ -10,23 +10,26 @@ namespace WorkoutLog.Transactions
 {
     public class AddNormalRoutineExerciseTransaction : ITransaction
     {
-        private WorkoutIdentity wId;
+        private readonly DayOfWeek dayOfWeek;
+        private readonly int routineId;
         private int exerciseId;
         private int reps;
         private double weight;
 
-        public AddNormalRoutineExerciseTransaction(WorkoutIdentity wId, int exerciseId, int reps, double weight)
+        public AddNormalRoutineExerciseTransaction(int routineId, DayOfWeek dayOfWeek, int exerciseId, int reps, double weight)
         {
-            this.wId = wId;
+
             this.exerciseId = exerciseId;
             this.reps = reps;
             this.weight = weight;
+            this.routineId = routineId;
+            this.dayOfWeek = dayOfWeek;
         }
 
         public void Execute()
         {            
-            var nre = new NormalRoutineExercise(wId, exerciseId, reps, weight);
-            WorkoutDatabase.AddRoutineExercise(wId, nre);
+            var nre = new NormalRoutineExercise( exerciseId, reps, weight);
+            WorkoutDatabase.AddRoutineExercise(routineId, dayOfWeek , nre);
         }
     }
 }

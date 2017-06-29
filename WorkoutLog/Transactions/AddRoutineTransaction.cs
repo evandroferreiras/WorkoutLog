@@ -8,18 +8,20 @@ namespace WorkoutLog.Transactions
 {
     public class AddRoutineTransaction : ITransaction
     {
+        private readonly int routineId;
         private readonly string name;
-        private WorkoutIdentity wId;
+        
 
-        public AddRoutineTransaction(WorkoutIdentity wId, string name)
+        public AddRoutineTransaction(int routineId, string name)
         {
-            this.wId = wId;
+            
             this.name = name;
+            this.routineId = routineId;
         }
 
         public void Execute()
         {
-            WorkoutDatabase.SaveRoutine(wId, name);
+            WorkoutDatabase.SaveRoutine(routineId, name);
         }
     }
 }

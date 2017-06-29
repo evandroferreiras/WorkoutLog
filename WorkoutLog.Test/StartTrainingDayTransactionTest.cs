@@ -20,15 +20,15 @@ namespace WorkoutLog.Test
         public void ShouldBePossibleToStartATrainingRoutine()
         {
             var exerciseId = 10;
-            var wId = new Workout.WorkoutIdentity( 1, DayOfWeek.Monday, 102);
+            var wId = new WorkoutIdentity( 1, DayOfWeek.Monday, 102);
             CreateAndReturnRoutine(wId, exerciseId, 10, 50);
 
             var dayAndHour = DateTime.Now;
-            var tId = new Training.TrainingIdentity(wId, dayAndHour);
-            var srt = new StartTrainingDayTransaction(tId);
+            var tId = new TrainingIdentity(wId.RoutineId, wId.DayOfWeek, dayAndHour);
+            var srt = new StartTrainingDayTransaction(tId.RoutineId, tId.DayOfWeek, tId.DayAndHour);
             srt.Execute();
 
-            var td = TrainingDayDatabase.GetTrainingDay(tId);
+            var td = TrainingDayDatabase.GetTrainingDay(tId.DayOfWeek, tId.DayAndHour);
 
             td.BeginDate.Should().Be(dayAndHour);
         }
