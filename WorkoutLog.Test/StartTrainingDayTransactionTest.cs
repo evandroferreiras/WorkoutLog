@@ -11,8 +11,6 @@ using WorkoutLog.Transactions;
 
 namespace WorkoutLog.Test
 {
-
-
     [TestClass]
     public class StartTrainingDayTransactionTest : BaseTest
     {
@@ -20,11 +18,13 @@ namespace WorkoutLog.Test
         public void ShouldBePossibleToStartATrainingRoutine()
         {
             var exerciseId = 10;
-            var wId = new WorkoutIdentity( 1, DayOfWeek.Monday, 102);
-            CreateAndReturnRoutine(wId, exerciseId, 10, 50);
+            var routineId = Database.WorkoutDatabase.GetNextRoutineId();
+            var dayOfWeek = DayOfWeek.Monday;
+
+            CreateAndReturnRoutine(routineId, dayOfWeek, exerciseId, 10, 50);
 
             var dayAndHour = DateTime.Now;
-            var tId = new TrainingIdentity(wId.RoutineId, wId.DayOfWeek, dayAndHour);
+            var tId = new TrainingIdentity(routineId, dayOfWeek, dayAndHour);
             var srt = new StartTrainingDayTransaction(tId.RoutineId, tId.DayOfWeek, tId.DayAndHour);
             srt.Execute();
 

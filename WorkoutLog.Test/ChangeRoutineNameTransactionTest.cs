@@ -17,16 +17,19 @@ namespace WorkoutLog.Test
         public void NameShouldBeChanged()
         {
             const int exerciseId = 10;
-            var wid = new WorkoutIdentity(13, DayOfWeek.Monday, 1042);
-            var r = new RoutineBuilder(wid.RoutineId, "Default")
-                          .AddDayAndNormalRoutineExercise(wid.DayOfWeek, wid.RoutineExerciseId, exerciseId, 10, 25)
+
+            var routineId = Database.WorkoutDatabase.GetNextRoutineId();
+            var dayOfWeek = DayOfWeek.Monday;
+
+            var r = new RoutineBuilder(routineId, "Default")
+                          .AddDayAndNormalRoutineExercise(dayOfWeek, exerciseId, 10, 25)
                           .Build();
 
 
-            var crnt = new ChangeRoutineNameTransaction(wid.RoutineId, "Default1");
+            var crnt = new ChangeRoutineNameTransaction(routineId, "Default1");
             crnt.Execute();
 
-            var returned = ReturnFirstRoutine(wid.RoutineId);
+            var returned = ReturnFirstRoutine(routineId);
             returned.Name.Should().Be("Default1");
         }
 
@@ -35,15 +38,15 @@ namespace WorkoutLog.Test
         public void NameShouldBeRequiredField()
         {
             const int exerciseId = 10;
-            var wid = new WorkoutIdentity( 13, DayOfWeek.Monday, 1042);
-            var r = new RoutineBuilder(wid.RoutineId, "Default")
-                          .AddDayAndNormalRoutineExercise(wid.DayOfWeek, wid.RoutineExerciseId, exerciseId, 10, 25)
+            var routineId = Database.WorkoutDatabase.GetNextRoutineId();
+            var r = new RoutineBuilder(routineId, "Default")
+                          .AddDayAndNormalRoutineExercise(DayOfWeek.Monday, exerciseId, 10, 25)
                           .Build();
 
             
             
 
-            var crnt = new ChangeRoutineNameTransaction(wid.RoutineId, "");
+            var crnt = new ChangeRoutineNameTransaction(routineId, "");
             crnt.Execute();
 
         }
@@ -52,8 +55,9 @@ namespace WorkoutLog.Test
         [ExpectedException(typeof(Exception), "The routine doesnt exist.")]
         public void ShouldntBePossibleChangeANameForAInexistentRoutine()
         {
-            var wid = new WorkoutIdentity(1366, DayOfWeek.Monday, 10426);
-            var crnt = new ChangeRoutineNameTransaction(wid.RoutineId, "teste");
+            var routineId = Database.WorkoutDatabase.GetNextRoutineId();
+            var dayOfWeek = DayOfWeek.Monday;
+            var crnt = new ChangeRoutineNameTransaction(routineId, "teste");
             crnt.Execute();
         }
     }

@@ -19,11 +19,12 @@ namespace WorkoutLog.Test
         public void ShouldBePossibleToDoExerciseWithoutChangeWeightAndReps()
         {
             var exerciseId = 101;
-            var wId = new WorkoutIdentity(12, DayOfWeek.Monday, 107);
-            CreateAndReturnRoutine(wId, exerciseId, 10, 50);
+            var routineId = Database.WorkoutDatabase.GetNextRoutineId();
+            var dayOfWeek = DayOfWeek.Monday;
+            CreateAndReturnRoutine(routineId, dayOfWeek,  exerciseId, 10, 50);
 
             var dayAndHour = DateTime.Now;
-            var tId = new TrainingIdentity(wId.RoutineId, wId.DayOfWeek, dayAndHour);
+            var tId = new TrainingIdentity(routineId, dayOfWeek, dayAndHour);
             var srt = new StartTrainingDayTransaction(tId.RoutineId, tId.DayOfWeek, tId.DayAndHour);
             srt.Execute();
 
@@ -37,11 +38,14 @@ namespace WorkoutLog.Test
         public void ShouldBePossibleToDoExerciseChangingWeight()
         {
             var exerciseId = 101;
-            var wId = new WorkoutIdentity(124, DayOfWeek.Monday, 1074);
-            CreateAndReturnRoutine(wId, exerciseId, 10, 50);
+
+            var routineId = Database.WorkoutDatabase.GetNextRoutineId();
+            var dayOfWeek = DayOfWeek.Monday;
+
+            CreateAndReturnRoutine(routineId, dayOfWeek, exerciseId, 10, 50);
 
             var dayAndHour = DateTime.Now;
-            var tId = new TrainingIdentity(wId.RoutineId, wId.DayOfWeek, dayAndHour);
+            var tId = new TrainingIdentity(routineId, dayOfWeek, dayAndHour);
             var srt = new StartTrainingDayTransaction(tId.RoutineId, tId.DayOfWeek, tId.DayAndHour);
             srt.Execute();
 
@@ -56,11 +60,13 @@ namespace WorkoutLog.Test
         public void ShouldntBePossibleDoMoreExercisesThanAvailable()
         {
             var exerciseId = 1019;
-            var wId = new WorkoutIdentity(129, DayOfWeek.Monday, 1097);
-            CreateAndReturnRoutine(wId, exerciseId, 2, 50);
+            var routineId = Database.WorkoutDatabase.GetNextRoutineId();
+            var dayOfWeek = DayOfWeek.Monday;
+
+            CreateAndReturnRoutine(routineId, dayOfWeek,exerciseId, 2, 50);
 
             var dayAndHour = DateTime.Now;
-            var tId = new TrainingIdentity(wId.RoutineId, wId.DayOfWeek, dayAndHour);
+            var tId = new TrainingIdentity(routineId, dayOfWeek, dayAndHour);
             var startTrainingDayTransaction = new StartTrainingDayTransaction(tId.RoutineId, tId.DayOfWeek, tId.DayAndHour);
             startTrainingDayTransaction.Execute();
 
@@ -78,11 +84,13 @@ namespace WorkoutLog.Test
         public void ExerciseShouldBeFinishedAfterAllSets()
         {
             var exerciseId = 2019;
-            var wId = new WorkoutIdentity(2829, DayOfWeek.Monday, 2097);
-            CreateAndReturnRoutine(wId, exerciseId, 2, 50);
+            var routineId = Database.WorkoutDatabase.GetNextRoutineId();
+            var dayOfWeek = DayOfWeek.Monday;
+
+            CreateAndReturnRoutine(routineId, dayOfWeek, exerciseId, 2, 50);
 
             var dayAndHour = DateTime.Now;
-            var tId = new TrainingIdentity(wId.RoutineId, wId.DayOfWeek, dayAndHour);
+            var tId = new TrainingIdentity(routineId, dayOfWeek, dayAndHour);
             var startTrainingDayTransaction = new StartTrainingDayTransaction(tId.RoutineId, tId.DayOfWeek, tId.DayAndHour);
             startTrainingDayTransaction.Execute();
 

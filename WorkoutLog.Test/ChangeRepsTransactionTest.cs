@@ -16,17 +16,19 @@ namespace WorkoutLog.Test
         [TestMethod]
         public void ShouldBePossibleChangeTheNumberOfReps()
         {
+            var routineId = Database.WorkoutDatabase.GetNextRoutineId();
+            var dayOfWeek = DayOfWeek.Monday;
             var exerciseId = 10;
-            var wid = new WorkoutIdentity( 1, DayOfWeek.Monday, 100);
-            CreateAndReturnRoutine(wid, exerciseId, 10, 50);
+            
+            CreateAndReturnRoutine(routineId, dayOfWeek, exerciseId, 10, 50);
 
-            var changeRepsTransaction = new ChangeRepsTransaction(wid.RoutineId, wid.DayOfWeek, 0, 20);
+            var changeRepsTransaction = new ChangeRepsTransaction(routineId, dayOfWeek, 0, 20);
             changeRepsTransaction.Execute();
 
-            var routine = ReturnFirstRoutine(wid.RoutineId);
+            var routine = ReturnFirstRoutine(routineId);
             var days = routine.Days;
             days.Should().HaveCount(1);
-            var res = days.FirstOrDefault(x => x.DayOfWeek == wid.DayOfWeek);
+            var res = days.FirstOrDefault(x => x.DayOfWeek == dayOfWeek);
             res.Should().NotBeNull();
             var re = res.RoutineExercises.FirstOrDefault(x => x.ExerciseId == exerciseId);
             re.Reps.Should().Be(20);
@@ -38,16 +40,17 @@ namespace WorkoutLog.Test
         {
 
             var exerciseId = 10;
-            var wid = new WorkoutIdentity( 1, DayOfWeek.Monday, 100);
-            CreateAndReturnRoutine(wid, exerciseId, 10, 50);
+            var routineId = Database.WorkoutDatabase.GetNextRoutineId();
+            var dayOfWeek = DayOfWeek.Monday;
+            CreateAndReturnRoutine(routineId, dayOfWeek, exerciseId, 10, 50);
 
-            var changeRepsTransaction = new ChangeRepsTransaction(wid.RoutineId, wid.DayOfWeek, 0, -20);
+            var changeRepsTransaction = new ChangeRepsTransaction(routineId, dayOfWeek, 0, -20);
             changeRepsTransaction.Execute();
 
-            var routine = ReturnFirstRoutine(wid.RoutineId);
+            var routine = ReturnFirstRoutine(routineId);
             var days = routine.Days;
             days.Should().HaveCount(1);
-            var res = days.FirstOrDefault(x => x.DayOfWeek == wid.DayOfWeek);
+            var res = days.FirstOrDefault(x => x.DayOfWeek == dayOfWeek);
             res.Should().NotBeNull();
             var re = res.RoutineExercises.FirstOrDefault(x => x.ExerciseId == exerciseId);
             re.Reps.Should().Be(20);
@@ -57,8 +60,10 @@ namespace WorkoutLog.Test
         [ExpectedException(typeof(Exception),"The routine doesnt exist")]
         public void ShouldntBePossibleChangeTheRepsOfAnInexistentWorkout()
         {
-            var wid = new WorkoutIdentity(91, DayOfWeek.Thursday, 100);
-            var changeRepsTransaction = new ChangeRepsTransaction(wid.RoutineId, wid.DayOfWeek, 0, -10);
+
+            var routineId = Database.WorkoutDatabase.GetNextRoutineId();
+
+            var changeRepsTransaction = new ChangeRepsTransaction(routineId, DayOfWeek.Thursday, 0, -10);
             changeRepsTransaction.Execute();
         }
     }

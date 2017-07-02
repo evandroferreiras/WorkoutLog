@@ -18,8 +18,9 @@ namespace WorkoutLog.Test
         private int firstExercise = 101;
         private int secondExercise = 102;
         private int thirdExercise = 103;
-        WorkoutIdentity wId = new WorkoutIdentity(12, DayOfWeek.Monday, 107);
+        
         TrainingIdentity tId;
+        private int routineId;
 
         public GetNextExerciseTest()
         {
@@ -32,12 +33,15 @@ namespace WorkoutLog.Test
             WorkoutDatabase.Clear();
             TrainingDayDatabase.Clear();
 
-            tId = new TrainingIdentity(wId.RoutineId, wId.DayOfWeek, DateTime.Now);
+            routineId = Database.WorkoutDatabase.GetNextRoutineId();
+            var dayOfWeek = DayOfWeek.Monday;
 
-            var routine = new RoutineBuilder(wId.RoutineId, "Default")
-              .AddDayAndNormalRoutineExercise(DayOfWeek.Friday, wId.RoutineExerciseId, firstExercise, 1, 10)
-              .AddDayAndNormalRoutineExercise(DayOfWeek.Monday, wId.RoutineExerciseId, secondExercise, 1, 10)
-              .AddDayAndNormalRoutineExercise(DayOfWeek.Thursday, wId.RoutineExerciseId, thirdExercise, 1, 10)
+            tId = new TrainingIdentity(routineId, dayOfWeek, DateTime.Now);
+
+            var routine = new RoutineBuilder(routineId, "Default")
+              .AddDayAndNormalRoutineExercise(DayOfWeek.Friday, firstExercise, 1, 10)
+              .AddDayAndNormalRoutineExercise(DayOfWeek.Monday, secondExercise, 1, 10)
+              .AddDayAndNormalRoutineExercise(DayOfWeek.Thursday, thirdExercise, 1, 10)
               .Build();
             
             var srt = new StartTrainingDayTransaction(tId.RoutineId, tId.DayOfWeek, tId.DayAndHour);
@@ -48,15 +52,14 @@ namespace WorkoutLog.Test
 
         [TestMethod]
         public void ShouldReturnTheFirstExercise()
-        {
-            var _wId = new WorkoutIdentity(12, DayOfWeek.Friday, 107);
-            var tId = new TrainingIdentity(_wId.RoutineId, _wId.DayOfWeek, this.tId.DayAndHour);
+        {            
+            var dayOfWeek = DayOfWeek.Friday;
+
+            var tId = new TrainingIdentity(routineId, dayOfWeek, this.tId.DayAndHour);
             var srt = new StartTrainingDayTransaction(tId.RoutineId, tId.DayOfWeek, tId.DayAndHour);
             srt.Execute();
 
             var td = TrainingDayDatabase.GetTrainingDay(tId.DayOfWeek, tId.DayAndHour);
-
-
 
             var tre = td.GetNextExercise();
             tre.ExerciseId.Should().Be(firstExercise);

@@ -18,23 +18,18 @@ namespace WorkoutLog.Database
         }
     }
 
-    public static class RoutineExercisesExtensions
-    {
-        public static IRoutineExercise ElementAtOrThrow(this IEnumerable<IRoutineExercise> res, int idx)
-        {
-            var re = res.ElementAtOrDefault(idx);
-            if (re == null)
-                throw new Exception("The routine exercise doesnt exist.");
-
-            return re;
-        }
-    }
-
     public class WorkoutDatabase
     {
 
-        static IList<Workout.Routine> routines = new List<Workout.Routine>();
-               
+        static IList<IRoutine> routines = new List<IRoutine>();
+
+        static int currentRoutineId = 0;
+
+        public static int GetNextRoutineId()
+        {
+            return ++currentRoutineId;
+        }
+
         public static void Clear()
         {
             routines.Clear();
@@ -42,13 +37,10 @@ namespace WorkoutLog.Database
 
         public static IRoutine GetRoutine(int routineId)
         {
-            var routine = (from r in routines
-                           where r.RoutineId == routineId
-                           select (r ?? null)).FirstOrDefault();
-            if (routine == null)
-            {
-                throw new Exception("The routine doesnt exist.");
-            }
+            var routine = routines.FirstOrDefault(x => x.RoutineId.Equals(routineId));
+            if (routine is null)
+                throw new Exception($"The routine {routineId} doesnt exist.");
+
             return routine;
         }
 
@@ -89,7 +81,11 @@ namespace WorkoutLog.Database
         {
             var day = GetDay(routineId, dayOfWeek);
             var reList = day.RoutineExercises.ToList();
-            var reToRemove = reList.ElementAtOrThrow(routineExerciseIdx);
+
+            var reToRemove = reList.ElementAtOrDefault(routineExerciseIdx);
+            if (reToRemove == null)
+                throw new Exception("The routine exercise doesnt exist.");
+           
             reList.Remove(reToRemove);
             day.RoutineExercises = reList.ToArray();
         }

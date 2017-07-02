@@ -18,20 +18,20 @@ namespace WorkoutLog.Test
         public void ShouldBePossibleChangeTheWeight()
         {
 
-            var routineId = 10090;
-            var dw = DayOfWeek.Monday;
-            var routineExerciseId = 100;
-            var exerciseId = 10;
-            var wid = new WorkoutIdentity(routineId, dw, routineExerciseId);
-            CreateAndReturnRoutine(wid, exerciseId, 10, 50);
+            var routineId = Database.WorkoutDatabase.GetNextRoutineId();
+            var dayOfWeek = DayOfWeek.Monday;
 
-            var changeWeightTransaction = new ChangeWeightTransaction(wid.RoutineId, wid.DayOfWeek,0, 60);
+            var exerciseId = 10;
+
+            CreateAndReturnRoutine(routineId, dayOfWeek, exerciseId, 10, 50);
+
+            var changeWeightTransaction = new ChangeWeightTransaction(routineId, dayOfWeek,0, 60);
             changeWeightTransaction.Execute();
 
-            var routine = ReturnFirstRoutine(wid.RoutineId);
+            var routine = ReturnFirstRoutine(routineId);
             var days = routine.Days;
             days.Should().HaveCount(1);
-            var day = days.First(x => x.DayOfWeek == wid.DayOfWeek);
+            var day = days.First(x => x.DayOfWeek == dayOfWeek);
             day.RoutineExercises.First().Should().BeOfType<NormalRoutineExercise>();
             var normalRoutineExercise = (NormalRoutineExercise)day.RoutineExercises.First(x => x.ExerciseId.Equals(exerciseId));
             normalRoutineExercise.Weight.Should().Be(60);
@@ -41,14 +41,14 @@ namespace WorkoutLog.Test
         [ExpectedException(typeof(ArgumentException), "The weight should'nt be negative")]
         public void ShouldBePossibleChangeTheWeightToNegative()
         {
-            var routineId = 1;
-            var dw = DayOfWeek.Monday;
-            var routineExerciseId = 100;
-            var exerciseId = 10;
-            var wid = new WorkoutIdentity( routineId, dw, routineExerciseId);
-            CreateAndReturnRoutine(wid, exerciseId, 10, 50);
+            var routineId = Database.WorkoutDatabase.GetNextRoutineId();
+            var dayOfWeek = DayOfWeek.Monday;
 
-            var changeWeightTransaction = new ChangeWeightTransaction(wid.RoutineId, wid.DayOfWeek, 0, -60);
+            var exerciseId = 10;
+            
+            CreateAndReturnRoutine(routineId, dayOfWeek,  exerciseId, 10, 50);
+
+            var changeWeightTransaction = new ChangeWeightTransaction(routineId, dayOfWeek, 0, -60);
             changeWeightTransaction.Execute();
         }
     }

@@ -17,12 +17,12 @@ namespace WorkoutLog.Test
         [TestMethod]
         public void ShouldBePossibleToAdd()
         {
-            var routineId = 45;
+            var routineId = Database.WorkoutDatabase.GetNextRoutineId();
             var dw = DayOfWeek.Monday;
-            var routineExerciseId = 1;
+
 
             var routine = new RoutineBuilder(routineId, "DefaultRoutine")
-                                            .AddDayAndNormalRoutineExercise(dw, routineExerciseId, 10, 10, 50)
+                                            .AddDayAndNormalRoutineExercise(dw,  10, 10, 50)
                                             .Build();
 
             var adt = new AddDayTransaction(routineId, DayOfWeek.Monday);
@@ -41,12 +41,12 @@ namespace WorkoutLog.Test
         public void ShouldntBePossibleToAddToAnInexistentRoutine()
         {
 
-            var routineId = 45;
+            var routineId = Database.WorkoutDatabase.GetNextRoutineId();
             var dw = DayOfWeek.Monday;
-            var routineExerciseId = 1;
+
 
             var routine = new RoutineBuilder(routineId, "DefaultRoutine")
-                                            .AddDayAndNormalRoutineExercise(dw, routineExerciseId, 10, 10, 50)
+                                            .AddDayAndNormalRoutineExercise(dw,  10, 10, 50)
                                             .Build();
 
             var adt = new AddDayTransaction(7000, DayOfWeek.Monday);

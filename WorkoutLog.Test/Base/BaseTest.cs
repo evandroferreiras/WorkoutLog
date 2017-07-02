@@ -24,28 +24,6 @@ namespace WorkoutLog.Test.Base
         public DateTime DayAndHour { get; private set; }
     }
 
-    public struct WorkoutIdentity
-    {
-        public int RoutineId { get; }
-        public DayOfWeek DayOfWeek { get; }
-        public int RoutineExerciseId { get; }
-
-        public WorkoutIdentity(int routineId) : this()
-        {
-            this.RoutineId = routineId;
-        }
-
-        public WorkoutIdentity(int routineId, DayOfWeek day) : this(routineId)
-        {
-            this.DayOfWeek = day;
-        }
-
-        public WorkoutIdentity(int routineId, DayOfWeek day, int routineExerciseId) : this(routineId, day)
-        {
-            this.RoutineExerciseId = routineExerciseId;
-        }
-    }
-
     public class RoutineBuilder 
     {
 
@@ -64,10 +42,8 @@ namespace WorkoutLog.Test.Base
             
         }
 
-        public RoutineBuilder AddDayAndNormalRoutineExercise(DayOfWeek dayOfWeek, int routineExerciseId, int exerciseId, int reps, double weight )
+        public RoutineBuilder AddDayAndNormalRoutineExercise(DayOfWeek dayOfWeek, int exerciseId, int reps, double weight )
         {
-            var id = new WorkoutIdentity(routineId, dayOfWeek, routineExerciseId);
-
             var nre = new NormalRoutineExercise(exerciseId, reps, weight);
 
             var day = days.FirstOrDefault(x => x.DayOfWeek == dayOfWeek);
@@ -85,7 +61,7 @@ namespace WorkoutLog.Test.Base
             if (days == null)
                 throw new ArgumentNullException("It's necessary define the days");
 
-            var wId = new WorkoutIdentity(routineId);
+            
             var routine = new Routine(routineId, name);
 
             var art = new AddRoutineTransaction(routineId, routine.Name);
@@ -93,7 +69,7 @@ namespace WorkoutLog.Test.Base
 
             foreach (var d in days)
             {
-                var adt = new AddDayTransaction(wId.RoutineId,d.DayOfWeek);
+                var adt = new AddDayTransaction(routineId,d.DayOfWeek);
                 adt.Execute();
 
                 foreach (var re in d.RoutineExercises)
@@ -109,10 +85,10 @@ namespace WorkoutLog.Test.Base
 
     public class BaseTest
     {
-        internal static IRoutine CreateAndReturnRoutine(WorkoutIdentity id, int exerciseId, int reps, double weight)
+        internal static IRoutine CreateAndReturnRoutine(int routineId, DayOfWeek dayOfWeek, int exerciseId, int reps, double weight)
         {
-            var routine = new RoutineBuilder( id.RoutineId, "Default")
-              .AddDayAndNormalRoutineExercise(id.DayOfWeek, id.RoutineExerciseId, exerciseId, reps, weight)
+            var routine = new RoutineBuilder( routineId, "Default")
+              .AddDayAndNormalRoutineExercise(dayOfWeek,  exerciseId, reps, weight)
               .Build();
 
             return routine;

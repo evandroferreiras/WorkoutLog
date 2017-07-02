@@ -15,7 +15,7 @@ namespace WorkoutLog.Test
             const int exerciseId = 10;
 
             var routine = new RoutineBuilder(1445, "Default")
-                          .AddDayAndNormalRoutineExercise(DayOfWeek.Monday, 1, exerciseId, 10, 50)
+                          .AddDayAndNormalRoutineExercise(DayOfWeek.Monday,  exerciseId, 10, 50)
                           .Build();
 
             var routineReturned = WorkoutDatabase.GetRoutine(1445);
@@ -32,7 +32,7 @@ namespace WorkoutLog.Test
             const int exerciseId = 10;
 
             var routine = new RoutineBuilder( 2, "")
-                          .AddDayAndNormalRoutineExercise(DayOfWeek.Monday, 1, exerciseId, 10, 25)
+                          .AddDayAndNormalRoutineExercise(DayOfWeek.Monday, exerciseId, 10, 25)
                           .Build();
         }
 

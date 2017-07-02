@@ -14,25 +14,26 @@ namespace WorkoutLog.Test
 {
 
     //TODO: Modify to transactions do the correct action and delete WorkoutIdentity
-    //TODO: Create am Id renegerator to RoutineId (could be a guid)
+    
     [TestClass]
     public class AddNormalRoutineExerciseTransactionTest : BaseTest
     {
         [TestMethod]
         public void ShouldBePossibleToAdd()
         {
-            var wId = new WorkoutIdentity( 47, DayOfWeek.Monday, 54);
+            var routineId = Database.WorkoutDatabase.GetNextRoutineId();
+            var dayOfWeek = DayOfWeek.Monday;
 
-            var routine = new RoutineBuilder( wId.RoutineId, "DefaultRoutine")
-                                            .AddDayAndNormalRoutineExercise(wId.DayOfWeek, wId.RoutineExerciseId, 10, 10, 50)
+            var routine = new RoutineBuilder(routineId, "DefaultRoutine")
+                                            .AddDayAndNormalRoutineExercise(dayOfWeek,  10, 10, 50)
                                             .Build();
 
 
-            var aret = new AddNormalRoutineExerciseTransaction(wId.RoutineId, wId.DayOfWeek, exerciseId: 50, reps: 7, weight: 89.6);
+            var aret = new AddNormalRoutineExerciseTransaction(routineId, dayOfWeek, exerciseId: 50, reps: 7, weight: 89.6);
             aret.Execute();
 
-            var returned = ReturnFirstRoutine(wId.RoutineId);
-            var day = returned.Days.FirstOrDefault(x => x.DayOfWeek == wId.DayOfWeek);
+            var returned = ReturnFirstRoutine(routineId);
+            var day = returned.Days.FirstOrDefault(x => x.DayOfWeek == dayOfWeek);
             day.Should().NotBeNull();
             day.RoutineExercises.Should().HaveCount(2);
             day.RoutineExercises.Last().Weight.Should().Be(89.6);
@@ -44,15 +45,16 @@ namespace WorkoutLog.Test
         [ExpectedException(typeof(Exception), "The day doesnt exist.")]
         public void ShouldntBePossibleToAddToAnInexistentDay()
         {
-            var wId = new WorkoutIdentity( 45, DayOfWeek.Monday, 54);
+            var routineId = Database.WorkoutDatabase.GetNextRoutineId();
+            var dayOfWeek = DayOfWeek.Monday;
+
             
-            var routine = new RoutineBuilder( wId.RoutineId, "DefaultRoutine")
-                                            .AddDayAndNormalRoutineExercise(DayOfWeek.Friday, wId.RoutineExerciseId, 10, 10, 50)
+            var routine = new RoutineBuilder(routineId, "DefaultRoutine")
+                                            .AddDayAndNormalRoutineExercise(dayOfWeek, 10, 10, 50)
                                             .Build();
 
-            const DayOfWeek anotherDay = DayOfWeek.Saturday;
-            var anotherWId = new WorkoutIdentity( wId.RoutineId, anotherDay, wId.RoutineExerciseId);
-            var aret = new AddNormalRoutineExerciseTransaction(anotherWId.RoutineId, anotherWId.DayOfWeek, exerciseId: 50, reps: 7, weight: 89.6);
+            const DayOfWeek anotherDay = DayOfWeek.Saturday;            
+            var aret = new AddNormalRoutineExerciseTransaction(routineId, anotherDay, exerciseId: 50, reps: 7, weight: 89.6);
             aret.Execute();
         }
 
@@ -61,8 +63,9 @@ namespace WorkoutLog.Test
         public void ShouldntBePossibleCreateAWorkoutWithNegativeNumberOfSeries()
         {
             const int exerciseId = 10;
-            var identity = new WorkoutIdentity(3);
-            CreateAndReturnRoutine(identity, exerciseId, -10, 50);
+            var routineId = Database.WorkoutDatabase.GetNextRoutineId();
+            var dayOfWeek = DayOfWeek.Monday;
+            CreateAndReturnRoutine(routineId,dayOfWeek, exerciseId, -10, 50);
         }
 
         [TestMethod]
@@ -70,9 +73,10 @@ namespace WorkoutLog.Test
         public void ShouldntBePossibleCreateAWorkoutWithNegativeWeight()
         {
             const int exerciseId = 10;
-            var identity = new WorkoutIdentity(1);
-            CreateAndReturnRoutine(identity, exerciseId, 10, -50);
-            var routineReturned = WorkoutDatabase.GetRoutine(identity.RoutineId);
+            var routineId = Database.WorkoutDatabase.GetNextRoutineId();
+
+            CreateAndReturnRoutine(routineId, DayOfWeek.Monday, exerciseId, 10, -50);
+            var routineReturned = WorkoutDatabase.GetRoutine(routineId);
         }
     }
 }
