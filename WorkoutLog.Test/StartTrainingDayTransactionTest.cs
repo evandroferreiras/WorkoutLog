@@ -31,6 +31,9 @@ namespace WorkoutLog.Test
             var td = TrainingDayDatabase.GetTrainingDay(tId.DayOfWeek, tId.DayAndHour);
 
             td.BeginDate.Should().Be(dayAndHour);
+            var tre = td.TrainingRoutineExercises.FirstOrDefault(x => x.ExerciseId == exerciseId);
+            tre.Should().NotBeNull();
+            tre.ExerciseName.Should().Be("Exercise-10");
         }
     }
 }

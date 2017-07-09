@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\ExerciseDatabase.cs" />
     <Compile Include="Database\TrainingDayDatabase.cs" />
     <Compile Include="Database\WorkoutDatabase.cs" />
     <Compile Include="Extensions\RoutineExerciseExtension.cs" />
@@ -66,7 +67,9 @@
     <Compile Include="Transactions\RemoveRoutineExerciseTransaction.cs" />
     <Compile Include="Transactions\StartTrainingDayTransaction.cs" />
     <Compile Include="Workout\Day.cs" />
+    <Compile Include="Workout\Exercise.cs" />
     <Compile Include="Workout\IDay.cs" />
+    <Compile Include="Workout\IExercise.cs" />
     <Compile Include="Workout\IRoutine.cs" />
     <Compile Include="Workout\IRoutineExercise.cs" />
     <Compile Include="Training\ITrainingDay.cs" />

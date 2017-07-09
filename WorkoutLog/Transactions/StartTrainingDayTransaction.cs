@@ -22,7 +22,14 @@ namespace WorkoutLog.Transactions
         public void Execute()
         {
             var day = WorkoutDatabase.GetDay(routineId, dayOfWeek);
-            TrainingDayDatabase.SaveTrainingDay(day.ToTrainingDay(dayAndHour));
+            var trainingDay = day.ToTrainingDay(dayAndHour);
+
+            foreach (var tre in trainingDay.TrainingRoutineExercises)
+            {
+                tre.ExerciseName = ExerciseDatabase.GetExerciseById(tre.ExerciseId)?.Name;
+            }
+
+            TrainingDayDatabase.SaveTrainingDay(trainingDay);
         }
 
     }

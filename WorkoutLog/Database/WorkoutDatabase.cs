@@ -23,7 +23,7 @@ namespace WorkoutLog.Database
 
         static IList<IRoutine> routines = new List<IRoutine>();
 
-        static int currentRoutineId = 0;
+        static int currentRoutineId;
 
         public static int GetNextRoutineId()
         {

@@ -12,6 +12,7 @@ namespace WorkoutLog.Training
         private readonly int reps;
         private readonly int exerciseId;
         private int numberOfPendingRepetitions;
+        private string exerciseName;
         private (int repNbr, double weight)[] repsDone;
 
         public TrainingRoutineExercise(int exerciseId, int reps)
@@ -48,6 +49,8 @@ namespace WorkoutLog.Training
                 return repsDone;
             }
         }
+
+        public string ExerciseName { get => exerciseName; set => exerciseName = value; }
 
         public void DoRep(double weight)
         {
